@@ -2,16 +2,18 @@ package org.superarts.ktpinblock
 
 import org.junit.Test
 
-import org.junit.Assert.*
+import org.superarts.ktpinblock.utility.MathUtility
 
 /**
  * Example local unit test, which will execute on the development machine (host).
  *
  * See [testing documentation](http://d.android.com/tools/testing).
  */
-class ExampleUnitTest {
+class MathUtilityTest {
     @Test
-    fun addition_isCorrect() {
-        assertEquals(4, 2 + 2)
+    fun randomNibble_shouldLessThan0x10() {
+        repeat(100) {
+            assert(MathUtility.randomNibble() < 0x10)
+        }
     }
 }
