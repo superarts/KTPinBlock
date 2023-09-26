@@ -22,12 +22,14 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             KTPinBlockSampleTheme {
-                // A surface container using the 'background' color from the theme
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    Greeting("ISO3: " + pinBlockEncoder.encode("43219876543210987", "1234", PinBlockFormat.ISO3))
+                    TextInfo(
+                        "ISO3: " + pinBlockEncoder.encode("43219876543210987", "1234", PinBlockFormat.ISO3) + "\n"
+                            + "ISO3: " + pinBlockEncoder.encodeToBytes("43219876543210987", "1234", PinBlockFormat.ISO3).toString()
+                    )
                 }
             }
         }
@@ -35,7 +37,7 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
+fun TextInfo(name: String, modifier: Modifier = Modifier) {
     Text(
         text = "KTPinBlock\n\n$name",
         modifier = modifier
@@ -46,6 +48,6 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
 @Composable
 fun GreetingPreview() {
     KTPinBlockSampleTheme {
-        Greeting("Android")
+        TextInfo("Android")
     }
 }

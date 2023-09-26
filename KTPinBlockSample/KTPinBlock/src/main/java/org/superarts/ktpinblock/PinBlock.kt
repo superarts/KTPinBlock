@@ -16,7 +16,20 @@ class PinBlock : PinBlockEncoder {
         Log.d("test", pinBytes.toHexString())
         Log.d("test", panBytes.toHexString())
         Log.d("test", blockBytes.toHexString())
-        return blockBytes.toHexString()
+        return blockBytes.toHexString().uppercase()
+    }
+
+    override fun encodeToBytes(pan: String, pin: String, format: PinBlockFormat) : ByteArray {
+        val pinBytes = format.preparePin(pin)
+        val panBytes = format.preparePan(pan)
+        return format.calculateBlock(pinBytes, panBytes)
+    }
+
+    // TODO: use setHiNibbleValue and setLowNibbleValue
+    override fun encodeToCompactBytes(pan: String, pin: String, format: PinBlockFormat) : ByteArray {
+        val pinBytes = format.preparePin(pin)
+        val panBytes = format.preparePan(pan)
+        return format.calculateBlock(pinBytes, panBytes)
     }
 
     private fun setHiNibbleValue(value: Byte): Byte = (0xF0 and (value.toInt() shl
