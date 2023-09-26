@@ -11,8 +11,7 @@ class PinBlock : PinBlockEncoder {
     override fun encode(pin: String, pan: String, format: PinBlockFormat) : String {
         val pinBytes = format.preparePin(pin)
         val panBytes = format.preparePan(pan)
-        // TODO: the following implementation is ISO3 only. We should create a BlockCalculator protocol.
-        val blockBytes = xor(pinBytes, panBytes)
+        val blockBytes = format.calculateBlock(pinBytes, panBytes)
         Log.d("test", pinBytes.toHexString())
         Log.d("test", panBytes.toHexString())
         Log.d("test", blockBytes.toHexString())

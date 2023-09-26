@@ -1,10 +1,12 @@
 package org.superarts.ktpinblock
 
+import org.superarts.ktpinblock.calculator.BlockCalculator
 import org.superarts.ktpinblock.calculator.PanPreparer
 import org.superarts.ktpinblock.calculator.PinPreparer
+import kotlin.experimental.xor
 
 // Implementation of: https://www.eftlab.com/knowledge-base/complete-list-of-pin-blocks#ISO-3
-object PinBlockIso3: PinPreparer, PanPreparer {
+object PinBlockIso3: PinPreparer, PanPreparer, BlockCalculator {
     /**
     Prepare a PIN – L is length of the PIN, P is PIN digit, R is random value from X’0′ to X’F’
     1	2	3	4	5	6	7	8	9	10	11	12	13	14	15	16
@@ -61,5 +63,9 @@ object PinBlockIso3: PinPreparer, PanPreparer {
         }
 
         return blockBytes
+    }
+
+    override fun calculateBlock(panBytes: ByteArray, pinBytes: ByteArray) : ByteArray {
+        return panBytes.zip(pinBytes).map { (x, y) -> x xor y }.toByteArray()
     }
 }
