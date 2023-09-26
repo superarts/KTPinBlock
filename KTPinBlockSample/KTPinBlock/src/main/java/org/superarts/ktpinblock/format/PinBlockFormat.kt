@@ -1,10 +1,12 @@
 package org.superarts.ktpinblock.format
 
 import org.superarts.ktpinblock.calculator.BlockCalculator
+import org.superarts.ktpinblock.calculator.BlockDecoder
 import org.superarts.ktpinblock.calculator.PanPreparer
 import org.superarts.ktpinblock.calculator.PinPreparer
 import org.superarts.ktpinblock.calculator.RedundantPanPreparer
 import org.superarts.ktpinblock.calculator.TodoBlockCalculator
+import org.superarts.ktpinblock.calculator.TodoBlockDecoder
 import org.superarts.ktpinblock.calculator.TodoPanPreparer
 import org.superarts.ktpinblock.calculator.TodoPinPreparer
 
@@ -13,7 +15,7 @@ import org.superarts.ktpinblock.calculator.TodoPinPreparer
  * From: [ETFLab](https://www.eftlab.com/knowledge-base/complete-list-of-pin-blocks)
  * TODO: support other formats if needed, e.g. Q/CUP 006.4
  */
-enum class PinBlockFormat : PinPreparer, PanPreparer, BlockCalculator {
+enum class PinBlockFormat : PinPreparer, PanPreparer, BlockCalculator, BlockDecoder {
     ISO0, ISO1, ISO2, ISO3, ISO4,
     ANSIX98, OEM1,
     ECI1, ECI2, ECI3, ECI4,
@@ -81,6 +83,16 @@ enum class PinBlockFormat : PinPreparer, PanPreparer, BlockCalculator {
             IBM3621, IBM3624, IBM4704, IBM5906,
             VISA2, VISA3, AS2805Format1, AS2805Format8 -> return pinBytes
             else -> TodoBlockCalculator.calculateBlock(panBytes, pinBytes)
+        }
+    }
+
+    /**
+     * Decode PIN block.
+     */
+    override fun decodeBlock(pinBlock: String, pan: String) : String {
+        return when (this) {
+            ISO3 -> PinBlockIso3.decodeBlock(pinBlock, pan)
+            else -> TodoBlockDecoder.decodeBlock(pinBlock, pan)
         }
     }
 }

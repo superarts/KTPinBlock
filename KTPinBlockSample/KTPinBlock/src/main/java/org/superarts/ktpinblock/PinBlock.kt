@@ -11,7 +11,7 @@ import kotlin.experimental.xor
  * Internal calculation should be based on bytes.
  * To combine hi and low nibbles together, use `encodeToCompactBytes`.
  */
-class PinBlock : PinBlockEncoder {
+class PinBlock : PinBlockEncoder, PinBlockDecoder {
     override fun encode(pan: String, pin: String, format: PinBlockFormat) : String {
         return encodeToBytes(pan, pin, format).toHexString()
     }
@@ -53,6 +53,10 @@ class PinBlock : PinBlockEncoder {
          */
 
         return compactBytes
+    }
+
+    override fun decodePin(pinBlock: String, pan: String, format: PinBlockFormat) : String {
+        return format.decodeBlock(pinBlock, pan)
     }
 
     // TODO: move the following functions to MathUtility.

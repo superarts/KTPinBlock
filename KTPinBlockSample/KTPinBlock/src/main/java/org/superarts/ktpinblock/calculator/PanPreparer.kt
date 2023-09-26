@@ -1,6 +1,6 @@
 package org.superarts.ktpinblock.calculator
 
-import org.superarts.ktpinblock.NoImplementionNeededException
+import org.superarts.ktpinblock.NoImplementationNeededException
 import org.superarts.ktpinblock.NotImplementedException
 
 /**
@@ -32,10 +32,10 @@ object TodoPanPreparer : PanPreparer {
  */
 object RedundantPanPreparer : PanPreparer {
     override fun preparePan(pan: String) : ByteArray {
-        throw NoImplementionNeededException("PAN preparer is not needed for this standard.")
+        throw NoImplementationNeededException("PAN preparer is not needed for this standard.")
     }
 
     override fun preparePanBytes(panBytes: ByteArray) : ByteArray {
-        throw NoImplementionNeededException("PAN preparer is not needed for this standard.")
+        throw NoImplementationNeededException("PAN preparer is not needed for this standard.")
     }
 }

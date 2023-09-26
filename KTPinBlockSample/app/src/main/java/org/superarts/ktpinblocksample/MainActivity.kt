@@ -12,12 +12,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import org.superarts.ktpinblocksample.ui.theme.KTPinBlockSampleTheme
 import org.superarts.ktpinblock.PinBlock
+import org.superarts.ktpinblock.PinBlockDecoder
 import org.superarts.ktpinblock.PinBlockEncoder
 import org.superarts.ktpinblock.format.PinBlockFormat
 import org.superarts.ktpinblock.utility.toHexString
 
 class MainActivity : ComponentActivity() {
     private val pinBlockEncoder: PinBlockEncoder = PinBlock()
+    private val pinBlockDecoder: PinBlockDecoder = PinBlock()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,9 +31,11 @@ class MainActivity : ComponentActivity() {
                 ) {
                     val pan = "43219876543210987"
                     val pin = "1234"
+                    val block = "3412ACC9B98CDF43"
                     TextInfo("PAN: " + pan + "\n"
-                            + "PIN: " + pin
-                            + "\n\n"
+                            + "PIN: " + pin + "\n"
+                            + "PIN Block: " + block + "\n"
+                            + "\n"
                             + "ISO3 string:\n"
                             + pinBlockEncoder.encode(pan, pin, PinBlockFormat.ISO3)
                             + "\n\n"
@@ -40,6 +44,9 @@ class MainActivity : ComponentActivity() {
                             + "\n\n"
                             + "ISO3 compact hex:\n"
                             + pinBlockEncoder.encodeToCompactBytes(pan, pin, PinBlockFormat.ISO3).toHexString(" ", "0x%02X")
+                            + "\n\n"
+                            + "ISO3 decode:\n"
+                            + pinBlockDecoder.decodePin(block, pan, PinBlockFormat.ISO3)
                     )
                 }
             }

@@ -31,5 +31,12 @@ class PinBlockIso3Test {
         assertEquals(4, bytes[5].toInt())
     }
 
+    @Test
+    fun prepareBlockBytes_shouldMatchResult() {
+        assertEquals(0x0.toByte(), PinBlockIso3.prepareBlockBytes("0")[0])
+        assertEquals(0xA.toByte(), PinBlockIso3.prepareBlockBytes("A")[0])
+        assertEquals(0xF.toByte(), PinBlockIso3.prepareBlockBytes("0F")[1])
+    }
+
     // TODO: add more unit tests
 }

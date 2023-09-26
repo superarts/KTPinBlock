@@ -8,8 +8,14 @@ internal object Const {
     var PIN_BLOCK_LENGTH = 16
 
     /**
-     * "0" in ASCII to perform PIN calculation.
+     * "0" in ASCII to perform PIN and PIN block calculation.
      * It should not be used for other purposes.
      */
     var PIN_CHAR_0 = 0x30
+
+    /**
+     * "0" in ASCII to perform PIN block calculation.
+     * It should not be used for other purposes.
+     */
+    var PIN_BLOCK_CHAR_A = 0x41
 }

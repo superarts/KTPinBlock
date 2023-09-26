@@ -3,11 +3,11 @@ package org.superarts.ktpinblock.calculator
 import org.superarts.ktpinblock.NotImplementedException
 
 /**
- * PIN block calculator. Every PIN block format requires a PIN preparer.
+ * PIN block calculator.
  */
 interface BlockCalculator {
     /**
-     * Calculate PIN block.
+     * Calculate PIN block from PAN and PIN.
      */
     fun calculateBlock(panBytes: ByteArray, pinBytes: ByteArray) : ByteArray
 }
