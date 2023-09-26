@@ -6,10 +6,10 @@ import org.superarts.ktpinblock.NotImplementedException
 /**
  * Prepare PAN.
  */
-interface PanPreparer {
-    fun preparePan(pan: String) : ByteArray
-    fun preparePanBytes(panBytes: ByteArray) : ByteArray
-}
+//interface PanPreparer {
+//    fun preparePan(pan: String) : ByteArray
+//    fun preparePanBytes(panBytes: ByteArray) : ByteArray
+//}
 
 /**
  * A placeholder PAN preparer to indicate an implementation will be required.

@@ -1,9 +1,12 @@
 package org.superarts.ktpinblock.format
 
-import org.superarts.ktpinblock.BlockEncoder
 import org.superarts.ktpinblock.UnexpectedNotNullException
 import org.superarts.ktpinblock.calculator.BlockDecoder
+import org.superarts.ktpinblock.calculator.BlockEncoder
 
+/**
+ * Implementation of [ISO-3](https://www.eftlab.com/knowledge-base/complete-list-of-pin-blocks#ISO-1)
+ */
 internal object PinBlockIso1: BlockEncoder, BlockDecoder {
     override fun encodeToBytes(pan: String?, pin: String) : ByteArray {
         if (pan != null) {
