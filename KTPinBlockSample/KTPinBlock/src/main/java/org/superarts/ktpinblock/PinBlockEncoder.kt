@@ -4,6 +4,7 @@ import org.superarts.ktpinblock.format.PinBlockFormat
 
 /**
  * Provides PIN block encoding functionalities.
+ * TODO: figure out the actual use cases and build easy-to-use APIs.
  */
 interface PinBlockEncoder {
     /**
@@ -18,6 +19,7 @@ interface PinBlockEncoder {
 
     /**
      * Encode to compact ByteArray, e.g. 0x34 0x12 0xAC 0xC9 ...
+     * If length is odd number, last byte will be 0xX0, whereas X is from 0 to F.
      */
     fun encodeToCompactBytes(pan: String, pin: String, format: PinBlockFormat) : ByteArray
 }

@@ -14,6 +14,7 @@ import org.superarts.ktpinblocksample.ui.theme.KTPinBlockSampleTheme
 import org.superarts.ktpinblock.PinBlock
 import org.superarts.ktpinblock.PinBlockEncoder
 import org.superarts.ktpinblock.format.PinBlockFormat
+import org.superarts.ktpinblock.utility.toHexString
 
 class MainActivity : ComponentActivity() {
     private val pinBlockEncoder: PinBlockEncoder = PinBlock()
@@ -26,9 +27,17 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
+                    val pan = "43219876543210987"
+                    val pin = "1234"
                     TextInfo(
-                        "ISO3: " + pinBlockEncoder.encode("43219876543210987", "1234", PinBlockFormat.ISO3) + "\n"
-                            + "ISO3: " + pinBlockEncoder.encodeToBytes("43219876543210987", "1234", PinBlockFormat.ISO3).toString()
+                        "ISO3 string:\n"
+                            + pinBlockEncoder.encode(pan, pin, PinBlockFormat.ISO3)
+                            + "\n\n"
+                            + "ISO3 hex:\n"
+                            + pinBlockEncoder.encodeToBytes(pan, pin, PinBlockFormat.ISO3).toHexString(" ", "0x%02X")
+                            + "\n\n"
+                            + "ISO3 compact hex:\n"
+                            + pinBlockEncoder.encodeToCompactBytes(pan, pin, PinBlockFormat.ISO3).toHexString(" ", "0x%02X")
                     )
                 }
             }
