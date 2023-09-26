@@ -27,7 +27,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    Greeting("ISO3: " + pinBlockEncoder.encode("1234", "43219876543210987", PinBlockFormat.ISO3))
+                    Greeting("ISO3: " + pinBlockEncoder.encode("43219876543210987", "1234", PinBlockFormat.ISO3))
                 }
             }
         }
