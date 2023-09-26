@@ -7,8 +7,8 @@ package org.superarts.ktpinblock.utility
  *
  * Discussion: we may make it public if there's any actual external use case.
  */
-internal fun ByteArray.toHexString() : String {
+internal fun ByteArray.toHexString(separator: String = "", format: String = "%01X") : String {
     return this.joinToString("") {
-        java.lang.String.format("%01x", it)
+        java.lang.String.format(format, it)
     }
 }

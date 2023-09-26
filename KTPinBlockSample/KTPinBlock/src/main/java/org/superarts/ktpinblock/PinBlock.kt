@@ -16,7 +16,7 @@ class PinBlock : PinBlockEncoder {
         Log.d("test", pinBytes.toHexString())
         Log.d("test", panBytes.toHexString())
         Log.d("test", blockBytes.toHexString())
-        return blockBytes.toHexString().uppercase()
+        return blockBytes.toHexString()
     }
 
     override fun encodeToBytes(pan: String, pin: String, format: PinBlockFormat) : ByteArray {
