@@ -18,12 +18,8 @@ internal object PinBlockIso3: BlockEncoder, BlockDecoder {
     1	2	3	4	5	6	7	8	9	10	11	12	13	14	15	16
     3	L	P	P	P	P	P/R	P/R	P/R	P/R	P/R	P/R	P/R	P/R	P/R	P/R
      */
-    fun preparePin(pin: String) : ByteArray {
-        return IsoPinPreparer.preparePin(pin, 3)
-    }
-
-    fun preparePinBytes(pinBytes: ByteArray) : ByteArray {
-        return IsoPinPreparer.preparePinBytes(pinBytes, 3)
+    private fun preparePin(pin: String) : ByteArray {
+        return IsoPinPreparer.preparePin(pin, Const.ISO3_VERSION)
     }
 
     /**
@@ -59,53 +55,28 @@ internal object PinBlockIso3: BlockEncoder, BlockDecoder {
         return MathUtility.xor(panBytes, pinBytes)
     }
 
+    /**
+     * BlockEncoder
+     */
     override fun encodeToBytes(pan: String?, pin: String) : ByteArray {
         if (pan == null) {
             throw UnexpectedNullException("PAN should not be null for ISO3")
         }
         val pinBytes = preparePin(pin)
         val panBytes = preparePan(pan)
-        Log.d("test", pinBytes.toHexString())
-        Log.d("test", panBytes.toHexString())
         return calculateBlock(pinBytes, panBytes)
     }
 
     /**
-     * Convert PIN block string "1234..." to ByteArray with 0x01, 0x02, 0x03, 0x04...
-     * This function does NOT validate PIN block length.
+     * BlockDecoder
      */
-//    fun prepareBlockBytes(pinBlock: String) : ByteArray {
-//        val blockBytes = pinBlock.toByteArray(Charsets.US_ASCII)
-//        val preparedBlockBytes = ByteArray(blockBytes.size)
-//        for (index in blockBytes.indices) {
-//            val byte = blockBytes[index]
-//            if (byte < Const.PIN_BLOCK_CHAR_A) {
-//                preparedBlockBytes[index] = (byte - Const.PIN_CHAR_0).toByte()
-//            } else {
-//                preparedBlockBytes[index] = (byte - Const.PIN_BLOCK_CHAR_A + 0xa).toByte()
-//            }
-//        }
-//        return preparedBlockBytes
-//    }
-
     override fun decodeBlock(pinBlock: String, pan: String?) : String {
         if (pan == null) {
             throw UnexpectedNullException("PAN should not be null for ISO3")
         }
-//        if (pinBlock.length != Const.PIN_BLOCK_LENGTH) {
-//            throw PinBlockLengthException("PIN block length is not " + Const.PIN_BLOCK_LENGTH)
-//        }
-//
-//        val blockBytes = prepareBlockBytes(pinBlock)
         val blockBytes = IsoPinDecoder.prepareBlockBytes(pinBlock)
         val panBytes = preparePan(pan)
         var pinBytes = MathUtility.xor(blockBytes, panBytes)
-        return IsoPinDecoder.decodePinBytes(pinBytes, 3)
-//        if (pinBytes[0].toInt() != 3) {
-//            throw PinException("Invalid PIN bit 1")
-//        }
-//
-//        val length = pinBytes[1]
-//        return pinBytes.toHexString().substring(2, 2 + length)
+        return IsoPinDecoder.decodePinBytes(pinBytes, Const.ISO3_VERSION)
     }
 }

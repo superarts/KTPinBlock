@@ -7,35 +7,42 @@ import org.superarts.ktpinblock.format.PinBlockIso3
 
 class PinBlockIso3Test {
     @Test(expected = PinException::class)
-    fun preparePin_shouldFailWithShortPin() {
-        PinBlockIso3.preparePin("123")
+    fun encodeToBytes_shouldThrowWithShortPin() {
+        PinBlockIso3.encodeToBytes("1111222233334444", "123")
+    }
+
+    @Test(expected = UnexpectedNullException::class)
+    fun encodeToBytes_shouldThrowWithoutPan() {
+        PinBlockIso3.encodeToBytes(null, "1234")
     }
 
     @Test
-    fun preparePin_shouldMatchSize() {
-        for (index in 4 until 20) {
-            val pin = "0".repeat(index)
-            val bytes = PinBlockIso3.preparePin(pin)
-            assertEquals(16, bytes.size)
-        }
+    fun encodeToBytes_shouldMatchSize() {
+        assertEquals(Const.PIN_BLOCK_LENGTH, PinBlockIso3.encodeToBytes("1111222233334444", "1234").size)
     }
 
+    /**
+     * EFTLab Example:
+        PIN blocks: PIN block encrypt operation finished
+        ****************************************
+        PAN:            43219876543210987
+        PIN:            1234
+        PAD:            N/A
+        Format:         Format 3 (ISO-3)
+        —————————————-
+        Clear PIN block:3412ACC9B98CDF43
+     */
     @Test
-    fun preparePin_shouldMatchResult() {
-        val bytes = PinBlockIso3.preparePin("1234")
-        assertEquals(3, bytes[0].toInt())
-        assertEquals(4, bytes[1].toInt())
-        assertEquals(1, bytes[2].toInt())
-        assertEquals(2, bytes[3].toInt())
-        assertEquals(3, bytes[4].toInt())
-        assertEquals(4, bytes[5].toInt())
-    }
-
-    @Test
-    fun prepareBlockBytes_shouldMatchResult() {
-        assertEquals(0x0.toByte(), PinBlockIso3.prepareBlockBytes("0")[0])
-        assertEquals(0xA.toByte(), PinBlockIso3.prepareBlockBytes("A")[0])
-        assertEquals(0xF.toByte(), PinBlockIso3.prepareBlockBytes("0F")[1])
+    fun encodeToBytes_shouldMatchEftLab() {
+        val pan = "43219876543210987"
+        val pin = "1234"
+        // Only bytes 0-5 are not random.
+        assertEquals(0x3, PinBlockIso3.encodeToBytes(pan, pin)[0])
+        assertEquals(0x4, PinBlockIso3.encodeToBytes(pan, pin)[1])
+        assertEquals(0x1, PinBlockIso3.encodeToBytes(pan, pin)[2])
+        assertEquals(0x2, PinBlockIso3.encodeToBytes(pan, pin)[3])
+        assertEquals(0xA, PinBlockIso3.encodeToBytes(pan, pin)[4])
+        assertEquals(0xC, PinBlockIso3.encodeToBytes(pan, pin)[5])
     }
 
     // TODO: add more unit tests

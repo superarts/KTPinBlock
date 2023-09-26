@@ -18,4 +18,14 @@ internal object Const {
      * It should not be used for other purposes.
      */
     var PIN_BLOCK_CHAR_A = 0x41
+
+    /**
+     * ISO 9564-1:2003 Format 1
+     */
+    var ISO1_VERSION = 1.toByte()
+
+    /**
+     * ISO 9564-1:2003 Format 3
+     */
+    var ISO3_VERSION = 3.toByte()
 }
