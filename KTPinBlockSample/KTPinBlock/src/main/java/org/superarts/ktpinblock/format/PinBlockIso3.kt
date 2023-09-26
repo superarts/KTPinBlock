@@ -71,7 +71,7 @@ object PinBlockIso3: PinPreparer, PanPreparer, BlockCalculator {
     }
 
     override fun calculateBlock(panBytes: ByteArray, pinBytes: ByteArray) : ByteArray {
-        // Perform XOR bytes by bytes.
+        // ISO3: Perform XOR bytes by bytes.
         return panBytes.zip(pinBytes).map { (x, y) -> x xor y }.toByteArray()
     }
 }

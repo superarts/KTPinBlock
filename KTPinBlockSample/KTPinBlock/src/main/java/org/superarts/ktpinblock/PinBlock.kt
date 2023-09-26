@@ -64,13 +64,4 @@ class PinBlock : PinBlockEncoder {
      */
     private fun setLowNibbleValue(value: Byte): Byte = (0x0F and
             value.toInt()).toByte()
-
-    private fun xor(panBytes: ByteArray, pinBytes: ByteArray) : ByteArray {
-        val result = ByteArray(16)
-        for (index in 0 until 16) {
-            result[index] = pinBytes[index] xor panBytes[index]
-            //Log.d("test", index.toString() + " " + pinBytes[index] + " " + panBytes[index] + " " + result[index])
-        }
-        return result
-    }
 }
