@@ -1,6 +1,7 @@
 package org.superarts.ktpinblock
 
 import android.util.Log
+import org.superarts.ktpinblock.format.PinBlockFormat
 import org.superarts.ktpinblock.utility.toHexString
 import kotlin.experimental.xor
 

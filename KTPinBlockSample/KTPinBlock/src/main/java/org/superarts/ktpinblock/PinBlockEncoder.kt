@@ -1,5 +1,7 @@
 package org.superarts.ktpinblock
 
+import org.superarts.ktpinblock.format.PinBlockFormat
+
 /**
  * Provides PIN block encoding functionalities.
  */

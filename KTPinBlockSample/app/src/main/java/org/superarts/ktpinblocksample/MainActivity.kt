@@ -13,7 +13,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import org.superarts.ktpinblocksample.ui.theme.KTPinBlockSampleTheme
 import org.superarts.ktpinblock.PinBlock
 import org.superarts.ktpinblock.PinBlockEncoder
-import org.superarts.ktpinblock.PinBlockFormat
+import org.superarts.ktpinblock.format.PinBlockFormat
 
 class MainActivity : ComponentActivity() {
     private val pinBlockEncoder: PinBlockEncoder = PinBlock()

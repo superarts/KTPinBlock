@@ -1,11 +1,15 @@
-package org.superarts.ktpinblock
+package org.superarts.ktpinblock.format
 
+import org.superarts.ktpinblock.PanException
+import org.superarts.ktpinblock.PinException
 import org.superarts.ktpinblock.calculator.BlockCalculator
 import org.superarts.ktpinblock.calculator.PanPreparer
 import org.superarts.ktpinblock.calculator.PinPreparer
 import kotlin.experimental.xor
 
-// Implementation of: https://www.eftlab.com/knowledge-base/complete-list-of-pin-blocks#ISO-3
+/**
+ * Implementation of: https://www.eftlab.com/knowledge-base/complete-list-of-pin-blocks#ISO-3
+ */
 object PinBlockIso3: PinPreparer, PanPreparer, BlockCalculator {
     /**
     Prepare a PIN – L is length of the PIN, P is PIN digit, R is random value from X’0′ to X’F’

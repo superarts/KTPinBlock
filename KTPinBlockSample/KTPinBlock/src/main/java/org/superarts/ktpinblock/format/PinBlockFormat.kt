@@ -1,4 +1,4 @@
-package org.superarts.ktpinblock
+package org.superarts.ktpinblock.format
 
 import org.superarts.ktpinblock.calculator.BlockCalculator
 import org.superarts.ktpinblock.calculator.PanPreparer
