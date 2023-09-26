@@ -17,3 +17,9 @@ class NotImplementedException(message: String) : PinBlockException(message)
 
 // Implementation is not needed.
 class NoImplementationNeededException(message: String) : PinBlockException(message)
+
+// Expecting not-null but got null.
+class UnexpectedNullException(message: String) : PinBlockException(message)
+
+// Expecting null but got not-null.
+class UnexpectedNotNullException(message: String) : PinBlockException(message)

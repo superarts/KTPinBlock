@@ -10,7 +10,7 @@ interface PinBlockDecoder {
     /**
      * Decode PIN to String, e.g. 1234
      */
-    fun decodePin(pinBlock: String, pan: String, format: PinBlockFormat) : String
+    fun decodePin(pinBlock: String, pan: String?, format: PinBlockFormat) : String
 
     /**
      * Decode PIN to ByteArray, e.g. 0x1 0x2 0x3 0x4 ...

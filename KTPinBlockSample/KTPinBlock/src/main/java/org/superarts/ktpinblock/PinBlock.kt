@@ -7,24 +7,20 @@ import kotlin.experimental.or
 import kotlin.experimental.xor
 
 /**
- * Implements PinBlockEncoder based on different PinBlockFormats.
- * Internal calculation should be based on bytes.
+ * Implements PinBlockEncoder and PinBlockDecoder based on different PinBlockFormats.
+ * Internal calculation is based on bytes, i.e. `encodeToBytes`.
  * To combine hi and low nibbles together, use `encodeToCompactBytes`.
  */
 class PinBlock : PinBlockEncoder, PinBlockDecoder {
-    override fun encode(pan: String, pin: String, format: PinBlockFormat) : String {
+    override fun encodeToBytes(pan: String?, pin: String, format: PinBlockFormat) : ByteArray {
+        return format.encodeToBytes(pan, pin)
+    }
+
+    override fun encode(pan: String?, pin: String, format: PinBlockFormat) : String {
         return encodeToBytes(pan, pin, format).toHexString()
     }
 
-    override fun encodeToBytes(pan: String, pin: String, format: PinBlockFormat) : ByteArray {
-        val pinBytes = format.preparePin(pin)
-        val panBytes = format.preparePan(pan)
-        Log.d("test", pinBytes.toHexString())
-        Log.d("test", panBytes.toHexString())
-        return format.calculateBlock(pinBytes, panBytes)
-    }
-
-    override fun encodeToCompactBytes(pan: String, pin: String, format: PinBlockFormat) : ByteArray {
+    override fun encodeToCompactBytes(pan: String?, pin: String, format: PinBlockFormat) : ByteArray {
         val blockBytes = encodeToBytes(pan, pin, format)
         if (blockBytes.size != Const.PIN_BLOCK_LENGTH) {
             throw PinBlockLengthException("PIN block size should be: " + Const.PIN_BLOCK_LENGTH)
@@ -55,7 +51,7 @@ class PinBlock : PinBlockEncoder, PinBlockDecoder {
         return compactBytes
     }
 
-    override fun decodePin(pinBlock: String, pan: String, format: PinBlockFormat) : String {
+    override fun decodePin(pinBlock: String, pan: String?, format: PinBlockFormat) : String {
         return format.decodeBlock(pinBlock, pan)
     }
 

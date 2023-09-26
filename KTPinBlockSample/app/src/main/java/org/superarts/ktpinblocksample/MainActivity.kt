@@ -4,6 +4,8 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -26,15 +28,19 @@ class MainActivity : ComponentActivity() {
         setContent {
             KTPinBlockSampleTheme {
                 Surface(
-                    modifier = Modifier.fillMaxSize(),
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .verticalScroll(rememberScrollState()),
                     color = MaterialTheme.colorScheme.background
                 ) {
                     val pan = "43219876543210987"
                     val pin = "1234"
-                    val block = "3412ACC9B98CDF43"
+                    val blockIso3 = "3412ACC9B98CDF43"
+                    val blockIso1 = "141234CE8C767872"
                     TextInfo("PAN: " + pan + "\n"
                             + "PIN: " + pin + "\n"
-                            + "PIN Block: " + block + "\n"
+                            + "PIN Block ISO-3: " + blockIso3 + "\n"
+                            + "PIN Block ISO-1: " + blockIso1 + "\n"
                             + "\n"
                             + "ISO3 string:\n"
                             + pinBlockEncoder.encode(pan, pin, PinBlockFormat.ISO3)
@@ -46,7 +52,19 @@ class MainActivity : ComponentActivity() {
                             + pinBlockEncoder.encodeToCompactBytes(pan, pin, PinBlockFormat.ISO3).toHexString(" ", "0x%02X")
                             + "\n\n"
                             + "ISO3 decode:\n"
-                            + pinBlockDecoder.decodePin(block, pan, PinBlockFormat.ISO3)
+                            + pinBlockDecoder.decodePin(blockIso3, pan, PinBlockFormat.ISO3)
+                            + "\n\n"
+                            + "ISO1 string:\n"
+                            + pinBlockEncoder.encode(null, pin, PinBlockFormat.ISO1)
+                            + "\n\n"
+                            + "ISO1 hex:\n"
+                            + pinBlockEncoder.encodeToBytes(null, pin, PinBlockFormat.ISO1).toHexString(" ", "0x%02X")
+                            + "\n\n"
+                            + "ISO1 compact hex:\n"
+                            + pinBlockEncoder.encodeToCompactBytes(null, pin, PinBlockFormat.ISO1).toHexString(" ", "0x%02X")
+                            + "\n\n"
+                            + "ISO1 decode:\n"
+                            + pinBlockDecoder.decodePin(blockIso1, null, PinBlockFormat.ISO1)
                     )
                 }
             }
