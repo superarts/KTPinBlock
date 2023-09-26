@@ -29,8 +29,10 @@ class MainActivity : ComponentActivity() {
                 ) {
                     val pan = "43219876543210987"
                     val pin = "1234"
-                    TextInfo(
-                        "ISO3 string:\n"
+                    TextInfo("PAN: " + pan + "\n"
+                            + "PIN: " + pin
+                            + "\n\n"
+                            + "ISO3 string:\n"
                             + pinBlockEncoder.encode(pan, pin, PinBlockFormat.ISO3)
                             + "\n\n"
                             + "ISO3 hex:\n"

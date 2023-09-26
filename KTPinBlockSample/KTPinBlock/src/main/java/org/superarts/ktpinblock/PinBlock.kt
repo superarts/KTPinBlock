@@ -8,6 +8,8 @@ import kotlin.experimental.xor
 
 /**
  * Implements PinBlockEncoder based on different PinBlockFormats.
+ * Internal calculation should be based on bytes.
+ * To combine hi and low nibbles together, use `encodeToCompactBytes`.
  */
 class PinBlock : PinBlockEncoder {
     override fun encode(pan: String, pin: String, format: PinBlockFormat) : String {
@@ -53,14 +55,17 @@ class PinBlock : PinBlockEncoder {
         return compactBytes
     }
 
+    // TODO: move the following functions to MathUtility.
+    //  However, they have to be private for some reason for the time being.
+
     /**
-     * Shift left then empty lower 4 bits of a Byte.
+     * Shift nibble left, then empty the low nibble.
      */
     private fun setHiNibbleValue(value: Byte): Byte = (0xF0 and (value.toInt() shl
             4)).toByte()
 
     /**
-     * Empty higher 4 bits of a Byte.
+     * Empty the high nibble.
      */
     private fun setLowNibbleValue(value: Byte): Byte = (0x0F and
             value.toInt()).toByte()

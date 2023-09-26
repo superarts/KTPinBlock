@@ -11,5 +11,5 @@ internal object Const {
      * "0" in ASCII to perform PIN calculation.
      * It should not be used for other purposes.
      */
-    var PIN_CHAR_0 = "0".toByte()
+    var PIN_CHAR_0 = 0x30
 }

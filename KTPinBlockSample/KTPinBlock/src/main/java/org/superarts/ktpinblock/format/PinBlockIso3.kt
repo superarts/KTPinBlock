@@ -6,6 +6,7 @@ import org.superarts.ktpinblock.PinException
 import org.superarts.ktpinblock.calculator.BlockCalculator
 import org.superarts.ktpinblock.calculator.PanPreparer
 import org.superarts.ktpinblock.calculator.PinPreparer
+import org.superarts.ktpinblock.utility.MathUtility
 import kotlin.experimental.xor
 
 /**
@@ -36,7 +37,7 @@ object PinBlockIso3: PinPreparer, PanPreparer, BlockCalculator {
             if (pinBytes.size + 2 > index) {
                 blockBytes[index] = (pinBytes[index - 2] - Const.PIN_CHAR_0).toByte()
             } else {
-                blockBytes[index] = (Math.random() * 16).toInt().toByte()
+                blockBytes[index] = MathUtility.randomNibble()
             }
         }
 
