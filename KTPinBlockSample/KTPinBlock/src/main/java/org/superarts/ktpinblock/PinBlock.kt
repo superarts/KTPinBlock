@@ -24,6 +24,21 @@ class PinBlock : PinBlockEncoder {
 
     override fun encodeToCompactBytes(pan: String, pin: String, format: PinBlockFormat) : ByteArray {
         val blockBytes = encodeToBytes(pan, pin, format)
+        if (blockBytes.size != Const.PIN_BLOCK_LENGTH) {
+            throw PinBlockLengthException("PIN block size should be: " + Const.PIN_BLOCK_LENGTH)
+        }
+
+        val compactBytes = ByteArray(blockBytes.size / 2)
+        for (index in 0 until blockBytes.size / 2) {
+            val highByte = setHiNibbleValue(blockBytes[index * 2])
+            val lowByte = setLowNibbleValue(blockBytes[index * 2 + 1])
+            compactBytes[index] = highByte or lowByte
+        }
+
+        // TODO: I came up the following code to support various length PIN block,
+        //  but realized that PIN block size should always be 16.
+        //  The following code should be removed after it's confirmed from ISO documents.
+        /*
         val compactBytes = ByteArray((blockBytes.size + 1) / 2)
         for (index in 0 until blockBytes.size / 2) {
             val highByte = setHiNibbleValue(blockBytes[index * 2])
@@ -33,6 +48,8 @@ class PinBlock : PinBlockEncoder {
         if (blockBytes.size % 2 == 1) {
             compactBytes[blockBytes.size / 2 + 1] = setHiNibbleValue(blockBytes[blockBytes.size - 1])
         }
+         */
+
         return compactBytes
     }
 

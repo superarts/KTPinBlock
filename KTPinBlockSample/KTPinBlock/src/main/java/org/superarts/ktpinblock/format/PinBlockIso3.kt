@@ -1,5 +1,6 @@
 package org.superarts.ktpinblock.format
 
+import org.superarts.ktpinblock.Const
 import org.superarts.ktpinblock.PanException
 import org.superarts.ktpinblock.PinException
 import org.superarts.ktpinblock.calculator.BlockCalculator
@@ -25,17 +26,17 @@ object PinBlockIso3: PinPreparer, PanPreparer, BlockCalculator {
     }
 
     override fun preparePinBytes(pinBytes: ByteArray) : ByteArray {
-        val blockBytes = ByteArray(16)
+        val blockBytes = ByteArray(Const.PIN_BLOCK_LENGTH)
         blockBytes[0] = 3.toByte()
         blockBytes[1] = pinBytes.size.toByte()
         for (index in 2 until 6) {
-            blockBytes[index] = (pinBytes[index - 2] - 0x30).toByte()
+            blockBytes[index] = (pinBytes[index - 2] - Const.PIN_CHAR_0).toByte()
         }
-        for (index in 6 until 16) {
+        for (index in 6 until Const.PIN_BLOCK_LENGTH) {
             if (pinBytes.size + 2 > index) {
-                blockBytes[index] = (pinBytes[index - 2] - 0x30).toByte()
+                blockBytes[index] = (pinBytes[index - 2] - Const.PIN_CHAR_0).toByte()
             } else {
-                blockBytes[index] = (Math.random() * 15).toInt().toByte()
+                blockBytes[index] = (Math.random() * 16).toInt().toByte()
             }
         }
 
@@ -58,18 +59,19 @@ object PinBlockIso3: PinPreparer, PanPreparer, BlockCalculator {
     }
 
     override fun preparePanBytes(panBytes: ByteArray) : ByteArray {
-        val blockBytes = ByteArray(16)
+        val blockBytes = ByteArray(Const.PIN_BLOCK_LENGTH)
         for (index in 0 until 4) {
             blockBytes[index] = 0.toByte()
         }
-        for (index in 4 until 16) {
-            blockBytes[index] = (panBytes[panBytes.size - 12 - 1 + index - 4] - 0x30).toByte()
+        for (index in 4 until Const.PIN_BLOCK_LENGTH) {
+            blockBytes[index] = (panBytes[panBytes.size - 12 - 1 + index - 4] - Const.PIN_CHAR_0).toByte()
         }
 
         return blockBytes
     }
 
     override fun calculateBlock(panBytes: ByteArray, pinBytes: ByteArray) : ByteArray {
+        // Perform XOR bytes by bytes.
         return panBytes.zip(pinBytes).map { (x, y) -> x xor y }.toByteArray()
     }
 }
