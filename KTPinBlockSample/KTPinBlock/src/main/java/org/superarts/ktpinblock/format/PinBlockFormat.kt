@@ -10,8 +10,8 @@ import org.superarts.ktpinblock.calculator.TodoPinPreparer
 
 /**
  * PIN block formats to be supported.
- * From: https://www.eftlab.com/knowledge-base/complete-list-of-pin-blocks
- * TODO: support other formats, e.g. Q/CUP 006.4
+ * From: [ETFLab](https://www.eftlab.com/knowledge-base/complete-list-of-pin-blocks)
+ * TODO: support other formats if needed, e.g. Q/CUP 006.4
  */
 enum class PinBlockFormat : PinPreparer, PanPreparer, BlockCalculator {
     ISO0, ISO1, ISO2, ISO3, ISO4,

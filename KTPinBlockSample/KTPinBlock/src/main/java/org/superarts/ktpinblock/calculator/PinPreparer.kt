@@ -2,6 +2,9 @@ package org.superarts.ktpinblock.calculator
 
 import org.superarts.ktpinblock.NotImplementedException
 
+/**
+ * Prepare PIN.
+ */
 interface PinPreparer {
     fun preparePin(pin: String) : ByteArray
     fun preparePinBytes(pin: ByteArray) : ByteArray

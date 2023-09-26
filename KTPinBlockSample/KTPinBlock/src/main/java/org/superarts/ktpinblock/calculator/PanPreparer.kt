@@ -3,6 +3,9 @@ package org.superarts.ktpinblock.calculator
 import org.superarts.ktpinblock.NoImplementionNeededException
 import org.superarts.ktpinblock.NotImplementedException
 
+/**
+ * Prepare PAN.
+ */
 interface PanPreparer {
     fun preparePan(pan: String) : ByteArray
     fun preparePanBytes(panBytes: ByteArray) : ByteArray
