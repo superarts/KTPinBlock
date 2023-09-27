@@ -1,0 +1,16 @@
+PODS:
+  - ktpinblock (1.0)
+
+DEPENDENCIES:
+  - ktpinblock (from `../ktpinblock/ktpinblock/`)
+
+EXTERNAL SOURCES:
+  ktpinblock:
+    :path: "../ktpinblock/ktpinblock/"
+
+SPEC CHECKSUMS:
+  ktpinblock: 2f575ac6a505cc68548a837fee00dad9022918fd
+
+PODFILE CHECKSUM: 3ed3f13db636ea682a299ecc5b005eeef8db1a6e
+
+COCOAPODS: 1.12.1

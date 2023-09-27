@@ -1,0 +1,12 @@
+source 'https://cdn.cocoapods.org'
+# source 'git@github.com:Kotlin/kotlin-cocoapods-spec.git'
+
+platform :ios, '14.1'
+
+target 'KTPinBlockSample' do
+  # Comment the next line if you don't want to use dynamic frameworks
+  use_frameworks!
+
+  pod 'ktpinblock', :path => '../ktpinblock/ktpinblock/'
+
+end

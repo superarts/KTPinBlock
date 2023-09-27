@@ -42,7 +42,9 @@ A Kotlin implementation of [PIN Block formats](https://www.eftlab.com/knowledge-
 ## File structure
 
 - `KTPinBlockSample`: Sample project with `KTPinBlock` module as a library.
-- TODO: other root level directories for documents, artifacts, KMM, etc.
+  - Under `KTPinBlockSample`, run `KTPinBlockSample`, and `aar` files can be found under `KTPinBlock/build/outputs/aar/`.
+- `ktpinblock`: A working in progress `KMM` project that is used by a sample iOS project.
+- `KTPinBlockCocoapodsSample`: A working in progress iOS sample project based on `KMM + Cocoapods`.
 
 ## Basic concepts
 
@@ -169,3 +171,23 @@ Plural forms are purposely avoided in the package and file names. The reasons ar
   - For example, `ktpinlock.utility` only contains one utility class at some point, but more classes may be added anytime. While the cost of refactoring it to `ktpinlock.utilities` is not high, it's still arguably unnecessary.
 
 But of course, plural forms should be used in other places when needed, e.g. variable names of collection types.
+
+## The status of `KMM` support
+
+This part is still working in progress. Some APIs are not available in `KMM`:
+
+- [ ] `String.toByteArray` and `Charsets.US_ASCII`. A manual byte-by-byte implementation is planned.
+- [x] `Math.random`. It is replaced by `Random.nextInt` and requires further testing.
+- [ ] `java.lang.String.format`. String formatting is still missing in `KMM`, but for our use case, we can come up with a less flexible implementation.
+
+Before all the problems are addressed, you can still `cd KTPinBlockCocoapodsSample`, run `pod install`, and then `open KTPinBlockSample.xcworkspace`. The `KMM` project can be compiled and we can call the following API in Swift (`ContentView.swift`), but the result is obviously wrong for now.
+
+```swift
+`PinBlock().encode(pan: "43219876543210987", pin: "1234", format: .iso3)`
+```
+
+This project is using [this `KMM` plugin version](https://plugins.jetbrains.com/plugin/14936-kotlin-multiplatform-mobile/versions/stable/357449). You may not need it to develop the iOS project, but `JDK` and Android Studio are needed.
+
+### `KMM` plugin installation issues
+
+It is a known issue that with complex proxy setup in some companies, it is tricky to install all the `KMM` dependencies. It may not be a problem for Android developers because they tend to deal with similar issues regularly, but for iOS developers, it is recommended to just set up your `KMM` environment with something like your home internet. After the dependencies are installed, you can make changes to `Kotlin` source files and verify / debug in the iOS project with no issues.
