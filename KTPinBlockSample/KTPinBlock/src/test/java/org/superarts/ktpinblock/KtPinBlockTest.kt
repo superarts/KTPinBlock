@@ -31,4 +31,13 @@ class KtPinBlockTest {
         val bytes = IsoPinDecoder.prepareBlockBytes("3412ACC9B98CDF43")
         assertEquals("1234", PinBlock().decodePinBlockFromBytes(bytes, "43219876543210987", PinBlockFormat.ISO3))
     }
+
+    @Test
+    fun encodeAndDecodeIso3() {
+        val pan = "1111222233334444"
+        val pin = "1234"
+        val encoded = PinBlock().encode(pan, pin, PinBlockFormat.ISO3)
+        val decoded = PinBlock().decodePinBlock(encoded, pan, PinBlockFormat.ISO3)
+        assertEquals(pin, decoded)
+    }
 }
