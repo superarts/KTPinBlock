@@ -15,7 +15,8 @@ A Kotlin implementation of [PIN Block formats](https://www.eftlab.com/knowledge-
 - [ ] 100% unit test coverage
 - [ ] Add [Hilt](https://developer.android.com/training/dependency-injection/hilt-android)
 - [ ] Add `ktlint`
-- [ ] `KMM` (to support iOS and web)
+- [x] `KMM` iOS support
+- [ ] `KMM` web support
 - [ ] CI with GitHub actions
 - [ ] CD with GitHub actions
 - [ ] Export to Maven
