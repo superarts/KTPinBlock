@@ -3,6 +3,7 @@ package org.superarts.ktpinblock.format.iso
 import org.superarts.ktpinblock.Const
 import org.superarts.ktpinblock.PinException
 import org.superarts.ktpinblock.utility.NibbleProvider
+import org.superarts.ktpinblock.utility.StringUtility
 
 /**
  * PIN preparer for ISO formats.
@@ -15,7 +16,7 @@ internal class IsoPinPreparer(private val fillProvider: NibbleProvider) {
         if (pin.length < 4) {
             throw PinException("Pin length is less than 4")
         }
-        val pinBytes = ByteArray(16) // TODO: pin.toByteArray(Charsets.US_ASCII)
+        val pinBytes = StringUtility.getByteArray(pin)
         return preparePinBytes(pinBytes, version)
     }
 

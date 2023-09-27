@@ -10,9 +10,11 @@ import kotlin.random.Random
 internal object MathUtility {
     /**
      * Random nimble from 0x0 to 0xF.
+     *
+     * Discussion: java.lang.Math is not available in KMM for now.
      */
     fun randomNibble() : Byte {
-        return (Random.nextInt(0, 16)).toByte()
+        return Random.nextInt(0, 16).toByte()
     }
 
     /**

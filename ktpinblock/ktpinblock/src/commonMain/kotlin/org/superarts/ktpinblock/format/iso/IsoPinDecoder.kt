@@ -3,6 +3,7 @@ package org.superarts.ktpinblock.format.iso
 import org.superarts.ktpinblock.Const
 import org.superarts.ktpinblock.PinBlockLengthException
 import org.superarts.ktpinblock.PinException
+import org.superarts.ktpinblock.utility.StringUtility
 import org.superarts.ktpinblock.utility.toHexString
 
 /**
@@ -17,7 +18,7 @@ internal object IsoPinDecoder {
             throw PinBlockLengthException("PIN block length is not " + Const.PIN_BLOCK_LENGTH)
         }
 
-        val blockBytes = ByteArray(16) // TODO: pinBlock.toByteArray(Charsets.US_ASCII)
+        val blockBytes = StringUtility.getByteArray(pinBlock)
         val preparedBlockBytes = ByteArray(blockBytes.size)
         for (index in blockBytes.indices) {
             val byte = blockBytes[index]
