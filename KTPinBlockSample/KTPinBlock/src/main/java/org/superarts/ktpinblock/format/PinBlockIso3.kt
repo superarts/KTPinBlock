@@ -8,7 +8,6 @@ import org.superarts.ktpinblock.calculator.BlockDecoder
 import org.superarts.ktpinblock.calculator.BlockEncoder
 import org.superarts.ktpinblock.utility.MathUtility
 import org.superarts.ktpinblock.utility.RandomNibbleProvider
-import org.superarts.ktpinblock.utility.toHexString
 
 /**
  * Implementation of [ISO-3](https://www.eftlab.com/knowledge-base/complete-list-of-pin-blocks#ISO-3)

@@ -6,6 +6,7 @@ import org.superarts.ktpinblock.format.PinBlockFormat
  * Provides more PIN block encoding APIs based on `BlockEncoder`.
  * Pass null as PAN if it is not available for certain formats.
  * TODO: figure out the actual use cases and build easy-to-use APIs.
+ * TODO: VERY IMPORTANT figure out whether pan should be null or ignored.
  */
 interface PinBlockEncoder {
     /**

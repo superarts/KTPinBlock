@@ -2,13 +2,12 @@ package org.superarts.ktpinblock.format
 
 import org.superarts.ktpinblock.Const
 import org.superarts.ktpinblock.PinException
-import org.superarts.ktpinblock.utility.MathUtility
 import org.superarts.ktpinblock.utility.NibbleProvider
 
 /**
  * PIN preparer for ISO formats.
  */
-internal class IsoPinPreparer(val fillProvider: NibbleProvider) {
+internal class IsoPinPreparer(private val fillProvider: NibbleProvider) {
     /**
      * Convert PIN string "1234..." to ByteArray with 0x01, 0x02, 0x03, 0x04...
      */
@@ -37,7 +36,7 @@ internal class IsoPinPreparer(val fillProvider: NibbleProvider) {
             if (pinBytes.size + 2 > index) {
                 blockBytes[index] = (pinBytes[index - 2] - Const.PIN_CHAR_0).toByte()
             } else {
-                blockBytes[index] = MathUtility.randomNibble()
+                blockBytes[index] = fillProvider.nibble
             }
         }
 

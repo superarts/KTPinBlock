@@ -25,6 +25,11 @@ internal object Const {
     var ISO1_VERSION = 1.toByte()
 
     /**
+     * ISO 9564-1:2003 Format 2
+     */
+    var ISO2_VERSION = 2.toByte()
+
+    /**
      * ISO 9564-1:2003 Format 3
      */
     var ISO3_VERSION = 3.toByte()

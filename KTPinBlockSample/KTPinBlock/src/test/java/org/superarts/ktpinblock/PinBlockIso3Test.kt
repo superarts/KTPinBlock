@@ -37,13 +37,45 @@ class PinBlockIso3Test {
         val pan = "43219876543210987"
         val pin = "1234"
         // Only bytes 0-5 are not random.
-        assertEquals(0x3, PinBlockIso3.encodeToBytes(pan, pin)[0])
-        assertEquals(0x4, PinBlockIso3.encodeToBytes(pan, pin)[1])
-        assertEquals(0x1, PinBlockIso3.encodeToBytes(pan, pin)[2])
-        assertEquals(0x2, PinBlockIso3.encodeToBytes(pan, pin)[3])
-        assertEquals(0xA, PinBlockIso3.encodeToBytes(pan, pin)[4])
-        assertEquals(0xC, PinBlockIso3.encodeToBytes(pan, pin)[5])
+        assertEquals(0x3.toByte(), PinBlockIso3.encodeToBytes(pan, pin)[0])
+        assertEquals(0x4.toByte(), PinBlockIso3.encodeToBytes(pan, pin)[1])
+        assertEquals(0x1.toByte(), PinBlockIso3.encodeToBytes(pan, pin)[2])
+        assertEquals(0x2.toByte(), PinBlockIso3.encodeToBytes(pan, pin)[3])
+        assertEquals(0xA.toByte(), PinBlockIso3.encodeToBytes(pan, pin)[4])
+        assertEquals(0xC.toByte(), PinBlockIso3.encodeToBytes(pan, pin)[5])
     }
 
-    // TODO: add more unit tests
+    @Test(expected = PinBlockLengthException::class)
+    fun decodeToBytes_shouldThrowBlock() {
+        val block = "11112222333344445"
+        val pan = "1111222233334444"
+        PinBlockIso3.decodeBlock(block, pan)
+    }
+
+    @Test(expected = PinException::class)
+    fun decodeToBytes_shouldThrowPinVersion() {
+        val block = "1111222233334444"
+        val pan = "1111222233334444"
+        // Pin version validation should fail
+        PinBlockIso3.decodeBlock(block, pan)
+    }
+
+    /**
+     * PIN blocks: PIN block decode operation finished
+        ****************************************
+        PIN block:      3412ACC9B98CDF43
+        PAN:            43219876543210987
+        PAD:            N/A
+        Format:         Format 3 (ISO-3)
+        —————————————-
+        Decoded PIN:    1234
+     */
+    @Test
+    fun decodeToBytes_shouldMatchEftLab() {
+        val block = "3412ACC9B98CDF43"
+        val pan = "43219876543210987"
+        assertEquals("1234", PinBlockIso3.decodeBlock(block, pan))
+    }
+
+    // TODO: add more test cases
 }

@@ -11,4 +11,6 @@ class MathUtilityTest {
             assert(MathUtility.randomNibble() < 0x10)
         }
     }
+
+    // TODO: add more test cases
 }
