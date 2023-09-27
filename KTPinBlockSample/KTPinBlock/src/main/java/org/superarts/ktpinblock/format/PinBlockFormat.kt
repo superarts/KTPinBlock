@@ -29,8 +29,8 @@ enum class PinBlockFormat : BlockEncoder, BlockDecoder {
     override fun encodeToBytes(pan: String?, pin: String) : ByteArray {
         checkPan(pan)
         return when (this) {
-            ISO0 -> PinBlockIso0.encodeToBytes(pan, pin)
-            ISO1 -> PinBlockIso1.encodeToBytes(null, pin)
+            ISO0, ECI1, VISA1 -> PinBlockIso0.encodeToBytes(pan, pin)
+            ISO1, ECI4 -> PinBlockIso1.encodeToBytes(null, pin)
             ISO2 -> PinBlockIso2.encodeToBytes(null, pin)
             ISO3 -> PinBlockIso3.encodeToBytes(pan, pin)
             else -> throw NotImplementedException("Encoder for this format is not implemented yet.")
@@ -43,8 +43,8 @@ enum class PinBlockFormat : BlockEncoder, BlockDecoder {
     override fun decodeBlock(pinBlock: String, pan: String?) : String {
         checkPan(pan)
         return when (this) {
-            ISO0 -> PinBlockIso0.decodeBlock(pinBlock, pan)
-            ISO1 -> PinBlockIso1.decodeBlock(pinBlock, null)
+            ISO0, ECI1, VISA1 -> PinBlockIso0.decodeBlock(pinBlock, pan)
+            ISO1, ECI4 -> PinBlockIso1.decodeBlock(pinBlock, null)
             ISO2 -> PinBlockIso2.decodeBlock(pinBlock, null)
             ISO3 -> PinBlockIso3.decodeBlock(pinBlock, pan)
             else -> throw NotImplementedException("Decoder for this format is not implemented yet.")
