@@ -33,6 +33,10 @@ A Kotlin implementation of [PIN Block formats](https://www.eftlab.com/knowledge-
 - [Implementation highlights](#implementation-highlights)
   - [Packages](#packages)
   - [Domain questions](#domain-questions)
+- [iOS support](#ios-support)
+  - [How to build](#how-to-build)
+  - [`kotlinx` compatibility issues](#kotlinx-compatibility-issues)
+  - [`KMM` plugin installation issues](#kmm-plugin-installation-issues)
 - [About TODOs in source code](#about-todos-in-source-code)
 - [Naming convention](#naming-convention)
   - [About plural form](#about-plural-form)
@@ -149,6 +153,51 @@ There are some essential questions not answered. PIN block related knowledge is 
 
 Another important question is whether PAN should be verified based on a format, or be ignored. In the current implementation, verification is performed and exceptions will be thrown. For example, if PAN is missing in `ISO-3`, or is presented in `ISO-2`, different exceptions will be raised. However, it is arguably better to always ignore PAN and just ignore them. More use cases from client app are needed. In the end, easy-to-use is always the purpose of this library.
 
+## iOS support
+
+We use [KMM](https://kotlinlang.org/docs/multiplatform-mobile-getting-started.html) to provide low-cost iOS support. The following `Swift` code calls `Kotlin` API:
+
+```swift
+`PinBlock().encode(pan: "43219876543210987", pin: "1234", format: .iso3)`
+```
+
+And it looks like this:
+
+![iOS sample app](https://user-images.githubusercontent.com/491257/271054227-dc20e789-0f3d-44ba-ba54-ddb0480da39c.png)
+
+For now, we use [update-kmm.sh](update-kmm.sh) to keep the Android project and the `KMM` project in sync. Please check the inline comments for next steps.
+
+### How to build
+
+- `cd KTPinBlockCocoapodsSample`
+- `pod install`
+- `open KTPinBlockSample.xcworkspace` and run it.
+
+This project is using [this `KMM` plugin version](https://plugins.jetbrains.com/plugin/14936-kotlin-multiplatform-mobile/versions/stable/357449). You may not need it to develop the iOS project, but `JDK` and Android Studio are needed.
+
+### `kotlinx` compatibility issues
+
+At the time being, `kotlinx` provides limited functionalities on multiple platforms, similarly with the `Foundation.framework` from `Swift` on other platforms than macOS. In general, there are multiple ways to work it around, for example:
+
+- Write native bridging code on different platforms. See `Platform.kt` as an example.
+- Replace some Java unavailable APIs with `Kotlin` equivalent.
+- Write your own supporting APIs.
+- Contribute your code to `kotlinx` directly.
+- Remove certain business logics from `KMM` and implement them separately on different platforms.
+
+<details>
+  <summary>Some `kotlinx` compatibility issues have been fixed in #1.</summary>
+This part is still working in progress. Some APIs are not available in `KMM`:
+
+- [x] `String.toByteArray` and `Charsets.US_ASCII`. A manual byte-by-byte implementation is planned.
+- [x] `Math.random`. It is replaced by `Random.nextInt` and requires further testing.
+- [x] `java.lang.String.format`. String formatting is still missing in `KMM`, but for our use case, we can come up with a less flexible implementation.
+</details>
+
+### `KMM` plugin installation issues
+
+It is a known issue that with complex proxy setup in some companies, it is tricky to install all the `KMM` dependencies. It may not be a problem for Android developers because they tend to deal with similar issues regularly, but for iOS developers, it is recommended to just set up your `KMM` environment with something like your home internet. After the dependencies are installed, you can make changes to `Kotlin` source files and verify / debug in the iOS project with no issues.
+
 ## About TODOs in source code
 
 We should always avoid merging dead codes to `develop` or `main` branch. However, due to the scope of tasks and communication restriction, certain doubts may not be clarified before merging.
@@ -171,23 +220,3 @@ Plural forms are purposely avoided in the package and file names. The reasons ar
   - For example, `ktpinlock.utility` only contains one utility class at some point, but more classes may be added anytime. While the cost of refactoring it to `ktpinlock.utilities` is not high, it's still arguably unnecessary.
 
 But of course, plural forms should be used in other places when needed, e.g. variable names of collection types.
-
-## The status of `KMM` support
-
-This part is still working in progress. Some APIs are not available in `KMM`:
-
-- [ ] `String.toByteArray` and `Charsets.US_ASCII`. A manual byte-by-byte implementation is planned.
-- [x] `Math.random`. It is replaced by `Random.nextInt` and requires further testing.
-- [ ] `java.lang.String.format`. String formatting is still missing in `KMM`, but for our use case, we can come up with a less flexible implementation.
-
-Before all the problems are addressed, you can still `cd KTPinBlockCocoapodsSample`, run `pod install`, and then `open KTPinBlockSample.xcworkspace`. The `KMM` project can be compiled and we can call the following API in Swift (`ContentView.swift`), but the result is obviously wrong for now.
-
-```swift
-`PinBlock().encode(pan: "43219876543210987", pin: "1234", format: .iso3)`
-```
-
-This project is using [this `KMM` plugin version](https://plugins.jetbrains.com/plugin/14936-kotlin-multiplatform-mobile/versions/stable/357449). You may not need it to develop the iOS project, but `JDK` and Android Studio are needed.
-
-### `KMM` plugin installation issues
-
-It is a known issue that with complex proxy setup in some companies, it is tricky to install all the `KMM` dependencies. It may not be a problem for Android developers because they tend to deal with similar issues regularly, but for iOS developers, it is recommended to just set up your `KMM` environment with something like your home internet. After the dependencies are installed, you can make changes to `Kotlin` source files and verify / debug in the iOS project with no issues.
