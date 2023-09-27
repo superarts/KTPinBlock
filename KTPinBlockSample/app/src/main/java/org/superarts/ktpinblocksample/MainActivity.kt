@@ -56,7 +56,7 @@ class MainActivity : ComponentActivity() {
                             + pinBlockEncoder.encodeToCompactBytes(pan, pin, PinBlockFormat.ISO3).toHexString(" ", "0x")
                             + "\n\n"
                             + "ISO3 decode:\n"
-                            + pinBlockDecoder.decodePin(blockIso3, pan, PinBlockFormat.ISO3)
+                            + pinBlockDecoder.decodePinBlock(blockIso3, pan, PinBlockFormat.ISO3)
                             + "\n\n"
                             + "ISO1 string:\n"
                             + pinBlockEncoder.encode(null, pin, PinBlockFormat.ISO1)
@@ -68,7 +68,7 @@ class MainActivity : ComponentActivity() {
                             + pinBlockEncoder.encodeToCompactBytes(null, pin, PinBlockFormat.ISO1).toHexString(" ", "0x")
                             + "\n\n"
                             + "ISO1 decode:\n"
-                            + pinBlockDecoder.decodePin(blockIso1, null, PinBlockFormat.ISO1)
+                            + pinBlockDecoder.decodePinBlock(blockIso1, null, PinBlockFormat.ISO1)
                             + "\n\n"
                             + "ISO2 string:\n"
                             + pinBlockEncoder.encode(null, pin, PinBlockFormat.ISO2)
@@ -80,7 +80,7 @@ class MainActivity : ComponentActivity() {
                             + pinBlockEncoder.encodeToCompactBytes(null, pin, PinBlockFormat.ISO2).toHexString(" ", "0x")
                             + "\n\n"
                             + "ISO2 decode:\n"
-                            + pinBlockDecoder.decodePin(blockIso2, null, PinBlockFormat.ISO2)
+                            + pinBlockDecoder.decodePinBlock(blockIso2, null, PinBlockFormat.ISO2)
                             + "\n\n"
                             + "ISO0 string:\n"
                             + pinBlockEncoder.encode(pan, pin, PinBlockFormat.ISO0)
@@ -92,7 +92,7 @@ class MainActivity : ComponentActivity() {
                             + pinBlockEncoder.encodeToCompactBytes(pan, pin, PinBlockFormat.ISO0).toHexString(" ", "0x")
                             + "\n\n"
                             + "ISO0 decode:\n"
-                            + pinBlockDecoder.decodePin(blockIso0, pan, PinBlockFormat.ISO0)
+                            + pinBlockDecoder.decodePinBlock(blockIso0, pan, PinBlockFormat.ISO0)
                     )
                 }
             }

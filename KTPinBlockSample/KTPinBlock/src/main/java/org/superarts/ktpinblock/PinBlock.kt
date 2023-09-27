@@ -3,6 +3,7 @@ package org.superarts.ktpinblock
 import org.superarts.ktpinblock.coder.PinBlockDecoder
 import org.superarts.ktpinblock.coder.PinBlockEncoder
 import org.superarts.ktpinblock.format.PinBlockFormat
+import org.superarts.ktpinblock.utility.StringUtility
 import org.superarts.ktpinblock.utility.toHexString
 import kotlin.experimental.or
 
@@ -51,9 +52,19 @@ class PinBlock : PinBlockEncoder, PinBlockDecoder {
         return compactBytes
     }
 
-    override fun decodePin(pinBlock: String, pan: String?, format: PinBlockFormat) : String {
+    override fun decodePinBlock(pinBlock: String, pan: String?, format: PinBlockFormat) : String {
         return format.decodeBlock(pinBlock, pan)
     }
+
+    override fun decodePinBlockFromBytes(pinBlock: ByteArray, pan: String?, format: PinBlockFormat) : String {
+        return format.decodeBlock(pinBlock.toHexString(), pan)
+    }
+
+    /**
+     * Decode PIN block from compact ByteArray.
+     * TODO: is it useful?
+     */
+    // override fun decodePinBlockFromCompactBytes(pinBlock: ByteArray, pan: String?, format: PinBlockFormat) : String { return "" }
 
     // TODO: move the following functions to MathUtility.
     //  However, they have to be private for some reason for the time being.

@@ -8,20 +8,21 @@ import org.superarts.ktpinblock.format.PinBlockFormat
  */
 interface PinBlockDecoder {
     /**
-     * Decode PIN to String, e.g. 1234
+     * Decode PIN block as String.
      */
-    fun decodePin(pinBlock: String, pan: String?, format: PinBlockFormat) : String
+    fun decodePinBlock(pinBlock: String, pan: String?, format: PinBlockFormat) : String
 
     // TODO: provide `ByteArray` based APIs
 
     /**
-     * Decode PIN to ByteArray, e.g. 0x1 0x2 0x3 0x4 ...
+     * Decode PIN block from ByteArray.
      */
-    // fun decodePinToBytes(pan: String, pin: String, format: PinBlockFormat) : ByteArray
+    fun decodePinBlockFromBytes(pinBlock: ByteArray, pan: String?, format: PinBlockFormat) : String
 
     /**
-     * Decode PIN to compact ByteArray, e.g. 0x12 0x34 ...
+     * Decode PIN block from compact ByteArray.
+     * TODO: is it useful?
      */
-    // fun decodePinToCompactBytes(pan: String, pin: String, format: PinBlockFormat) : ByteArray
+    // fun decodePinBlockFromCompactBytes(pinBlock: ByteArray, pan: String?, format: PinBlockFormat) : String
 }
 
