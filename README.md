@@ -20,6 +20,24 @@ A Kotlin implementation of [PIN Block formats](https://www.eftlab.com/knowledge-
 - [ ] CD with GitHub actions
 - [ ] Remove all TODOs in the codebase
 
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+## Contents
+
+- [File structure](#file-structure)
+- [Basic concepts](#basic-concepts)
+- [How to use](#how-to-use)
+  - [Encoding](#encoding)
+  - [Decoding](#decoding)
+- [Implementation highlights](#implementation-highlights)
+  - [Packages](#packages)
+  - [Domain questions](#domain-questions)
+- [About TODOs in source code](#about-todos-in-source-code)
+- [Naming convention](#naming-convention)
+  - [About plural form](#about-plural-form)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 ## File structure
 
 - `KTPinBlockSample`: Sample project with `KTPinBlock` module as a library.
