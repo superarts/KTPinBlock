@@ -2,8 +2,7 @@ package org.superarts.ktpinblock.format.iso
 
 import org.superarts.ktpinblock.Const
 import org.superarts.ktpinblock.PanException
-import org.superarts.ktpinblock.PinException
-import org.superarts.ktpinblock.utility.NibbleProvider
+import org.superarts.ktpinblock.utility.StringUtility
 
 /**
  * PAN preparer for ISO formats.
@@ -16,7 +15,7 @@ internal object IsoPanPreparer {
         if (pan.length < 12) {
             throw PanException("Pan length is less than 12")
         }
-        val panBytes = pan.toByteArray(Charsets.US_ASCII)
+        val panBytes = StringUtility.getByteArray(pan)
         return preparePanBytes(panBytes)
     }
 
