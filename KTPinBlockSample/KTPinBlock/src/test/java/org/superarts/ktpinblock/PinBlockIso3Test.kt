@@ -3,7 +3,7 @@ package org.superarts.ktpinblock
 import org.junit.Test
 
 import org.junit.Assert.*
-import org.superarts.ktpinblock.format.PinBlockIso3
+import org.superarts.ktpinblock.format.iso.PinBlockIso3
 
 class PinBlockIso3Test {
     @Test(expected = PinException::class)

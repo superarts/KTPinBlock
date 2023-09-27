@@ -20,6 +20,11 @@ internal object Const {
     var PIN_BLOCK_CHAR_A = 0x41
 
     /**
+     * ISO 9564-1:2003 Format 0
+     */
+    var ISO0_VERSION = 0.toByte()
+
+    /**
      * ISO 9564-1:2003 Format 1
      */
     var ISO1_VERSION = 1.toByte()

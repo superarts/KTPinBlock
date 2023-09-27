@@ -18,6 +18,7 @@ A Kotlin implementation of [PIN Block formats](https://www.eftlab.com/knowledge-
 - [ ] `KMM` (to support iOS and web)
 - [ ] CI with GitHub actions
 - [ ] CD with GitHub actions
+- [ ] Export to Maven
 - [ ] Remove all TODOs in the codebase
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->

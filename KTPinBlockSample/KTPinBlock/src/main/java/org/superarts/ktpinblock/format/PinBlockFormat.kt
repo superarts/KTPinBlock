@@ -4,6 +4,10 @@ import org.superarts.ktpinblock.NotImplementedException
 import org.superarts.ktpinblock.UnexpectedNotNullException
 import org.superarts.ktpinblock.coder.BlockDecoder
 import org.superarts.ktpinblock.coder.BlockEncoder
+import org.superarts.ktpinblock.format.iso.PinBlockIso0
+import org.superarts.ktpinblock.format.iso.PinBlockIso1
+import org.superarts.ktpinblock.format.iso.PinBlockIso2
+import org.superarts.ktpinblock.format.iso.PinBlockIso3
 
 /**
  * PIN block formats to be supported.
@@ -25,6 +29,7 @@ enum class PinBlockFormat : BlockEncoder, BlockDecoder {
     override fun encodeToBytes(pan: String?, pin: String) : ByteArray {
         checkPan(pan)
         return when (this) {
+            ISO0 -> PinBlockIso0.encodeToBytes(pan, pin)
             ISO1 -> PinBlockIso1.encodeToBytes(null, pin)
             ISO2 -> PinBlockIso2.encodeToBytes(null, pin)
             ISO3 -> PinBlockIso3.encodeToBytes(pan, pin)
@@ -38,6 +43,7 @@ enum class PinBlockFormat : BlockEncoder, BlockDecoder {
     override fun decodeBlock(pinBlock: String, pan: String?) : String {
         checkPan(pan)
         return when (this) {
+            ISO0 -> PinBlockIso0.decodeBlock(pinBlock, pan)
             ISO1 -> PinBlockIso1.decodeBlock(pinBlock, null)
             ISO2 -> PinBlockIso2.decodeBlock(pinBlock, null)
             ISO3 -> PinBlockIso3.decodeBlock(pinBlock, pan)

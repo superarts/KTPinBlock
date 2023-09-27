@@ -38,11 +38,13 @@ class MainActivity : ComponentActivity() {
                     val blockIso3 = "3412ACC9B98CDF43"
                     val blockIso1 = "141234CE8C767872"
                     val blockIso2 = "241234FFFFFFFFFF"
+                    val blockIso0 = "0412AC89ABCDEF67"
                     TextInfo("PAN: " + pan + "\n"
                             + "PIN: " + pin + "\n"
                             + "PIN Block ISO-3: " + blockIso3 + "\n"
                             + "PIN Block ISO-1: " + blockIso1 + "\n"
                             + "PIN Block ISO-2: " + blockIso2 + "\n"
+                            + "PIN Block ISO-0: " + blockIso0 + "\n"
                             + "\n"
                             + "ISO3 string:\n"
                             + pinBlockEncoder.encode(pan, pin, PinBlockFormat.ISO3)
@@ -79,6 +81,18 @@ class MainActivity : ComponentActivity() {
                             + "\n\n"
                             + "ISO2 decode:\n"
                             + pinBlockDecoder.decodePin(blockIso2, null, PinBlockFormat.ISO2)
+                            + "\n\n"
+                            + "ISO0 string:\n"
+                            + pinBlockEncoder.encode(pan, pin, PinBlockFormat.ISO0)
+                            + "\n\n"
+                            + "ISO0 hex:\n"
+                            + pinBlockEncoder.encodeToBytes(pan, pin, PinBlockFormat.ISO0).toHexString(" ", "0x%02X")
+                            + "\n\n"
+                            + "ISO0 compact hex:\n"
+                            + pinBlockEncoder.encodeToCompactBytes(pan, pin, PinBlockFormat.ISO0).toHexString(" ", "0x%02X")
+                            + "\n\n"
+                            + "ISO0 decode:\n"
+                            + pinBlockDecoder.decodePin(blockIso0, pan, PinBlockFormat.ISO0)
                     )
                 }
             }
