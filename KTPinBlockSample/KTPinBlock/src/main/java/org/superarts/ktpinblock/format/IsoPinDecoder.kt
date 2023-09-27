@@ -8,7 +8,7 @@ import org.superarts.ktpinblock.utility.toHexString
 /**
  * PIN decoder for ISO formats.
  */
-object IsoPinDecoder {
+internal object IsoPinDecoder {
     /**
      * Convert PIN block string "12AB..." to ByteArray with 0x01, 0x02, 0x0a, 0x0b...
      */

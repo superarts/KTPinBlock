@@ -12,6 +12,8 @@ interface PinBlockDecoder {
      */
     fun decodePin(pinBlock: String, pan: String?, format: PinBlockFormat) : String
 
+    // TODO: provide `ByteArray` based APIs
+
     /**
      * Decode PIN to ByteArray, e.g. 0x1 0x2 0x3 0x4 ...
      */
