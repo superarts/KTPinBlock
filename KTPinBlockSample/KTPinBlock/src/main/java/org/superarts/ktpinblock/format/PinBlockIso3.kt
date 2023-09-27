@@ -1,11 +1,10 @@
 package org.superarts.ktpinblock.format
 
-import android.util.Log
 import org.superarts.ktpinblock.Const
 import org.superarts.ktpinblock.PanException
 import org.superarts.ktpinblock.UnexpectedNullException
-import org.superarts.ktpinblock.calculator.BlockDecoder
-import org.superarts.ktpinblock.calculator.BlockEncoder
+import org.superarts.ktpinblock.coder.BlockDecoder
+import org.superarts.ktpinblock.coder.BlockEncoder
 import org.superarts.ktpinblock.utility.MathUtility
 import org.superarts.ktpinblock.utility.RandomNibbleProvider
 
@@ -50,13 +49,16 @@ internal object PinBlockIso3: BlockEncoder, BlockDecoder {
         return blockBytes
     }
 
-    private fun calculateBlock(panBytes: ByteArray, pinBytes: ByteArray) : ByteArray {
+    /**
+     * Encode PAN and PIN to PIN block
+     */
+    private fun encodeBlock(panBytes: ByteArray, pinBytes: ByteArray) : ByteArray {
         // ISO3: Perform XOR bytes by bytes.
         return MathUtility.xor(panBytes, pinBytes)
     }
 
     /**
-     * BlockEncoder
+     * BlockEncoder: encode to byte
      */
     override fun encodeToBytes(pan: String?, pin: String) : ByteArray {
         if (pan == null) {
@@ -64,11 +66,11 @@ internal object PinBlockIso3: BlockEncoder, BlockDecoder {
         }
         val pinBytes = preparePin(pin)
         val panBytes = preparePan(pan)
-        return calculateBlock(pinBytes, panBytes)
+        return encodeBlock(pinBytes, panBytes)
     }
 
     /**
-     * BlockDecoder
+     * BlockDecoder: decode to string
      */
     override fun decodeBlock(pinBlock: String, pan: String?) : String {
         if (pan == null) {

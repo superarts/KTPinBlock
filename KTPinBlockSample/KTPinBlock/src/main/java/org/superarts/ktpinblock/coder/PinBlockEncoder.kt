@@ -1,4 +1,4 @@
-package org.superarts.ktpinblock
+package org.superarts.ktpinblock.coder
 
 import org.superarts.ktpinblock.format.PinBlockFormat
 

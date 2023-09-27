@@ -2,8 +2,8 @@ package org.superarts.ktpinblock.format
 
 import org.superarts.ktpinblock.Const
 import org.superarts.ktpinblock.UnexpectedNotNullException
-import org.superarts.ktpinblock.calculator.BlockDecoder
-import org.superarts.ktpinblock.calculator.BlockEncoder
+import org.superarts.ktpinblock.coder.BlockDecoder
+import org.superarts.ktpinblock.coder.BlockEncoder
 import org.superarts.ktpinblock.utility.FNibbleProvider
 
 /**

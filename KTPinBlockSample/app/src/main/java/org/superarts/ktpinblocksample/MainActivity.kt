@@ -14,8 +14,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import org.superarts.ktpinblocksample.ui.theme.KTPinBlockSampleTheme
 import org.superarts.ktpinblock.PinBlock
-import org.superarts.ktpinblock.PinBlockDecoder
-import org.superarts.ktpinblock.PinBlockEncoder
+import org.superarts.ktpinblock.coder.PinBlockDecoder
+import org.superarts.ktpinblock.coder.PinBlockEncoder
 import org.superarts.ktpinblock.format.PinBlockFormat
 import org.superarts.ktpinblock.utility.toHexString
 

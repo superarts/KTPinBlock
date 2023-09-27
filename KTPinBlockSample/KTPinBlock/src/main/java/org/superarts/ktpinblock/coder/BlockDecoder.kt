@@ -1,4 +1,4 @@
-package org.superarts.ktpinblock.calculator
+package org.superarts.ktpinblock.coder
 
 /**
  * PIN block decoder. It's the reversed procedure of PIN block calculator.

@@ -1,4 +1,4 @@
-package org.superarts.ktpinblock.calculator
+package org.superarts.ktpinblock.coder
 
 /**
  * Encode PAN and PIN to PIN block.

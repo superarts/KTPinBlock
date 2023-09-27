@@ -1,10 +1,10 @@
 package org.superarts.ktpinblock
 
-import android.util.Log
+import org.superarts.ktpinblock.coder.PinBlockDecoder
+import org.superarts.ktpinblock.coder.PinBlockEncoder
 import org.superarts.ktpinblock.format.PinBlockFormat
 import org.superarts.ktpinblock.utility.toHexString
 import kotlin.experimental.or
-import kotlin.experimental.xor
 
 /**
  * Implements PinBlockEncoder and PinBlockDecoder based on different PinBlockFormats.
