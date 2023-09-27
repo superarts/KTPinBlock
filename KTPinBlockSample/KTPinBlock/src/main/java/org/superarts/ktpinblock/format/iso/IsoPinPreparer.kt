@@ -2,17 +2,18 @@ package org.superarts.ktpinblock.format.iso
 
 import org.superarts.ktpinblock.Const
 import org.superarts.ktpinblock.PinException
+import org.superarts.ktpinblock.format.PinPreparer
 import org.superarts.ktpinblock.utility.NibbleProvider
 import org.superarts.ktpinblock.utility.StringUtility
 
 /**
  * PIN preparer for ISO formats.
  */
-internal class IsoPinPreparer(private val fillProvider: NibbleProvider) {
+internal class IsoPinPreparer(private val fillProvider: NibbleProvider) : PinPreparer {
     /**
      * Convert PIN string "1234..." to ByteArray with 0x01, 0x02, 0x03, 0x04...
      */
-    fun preparePin(pin: String, version: Byte): ByteArray {
+    override fun preparePin(pin: String, version: Byte): ByteArray {
         if (pin.length < 4) {
             throw PinException("Pin length is less than 4")
         }
