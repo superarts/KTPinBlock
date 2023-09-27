@@ -14,6 +14,10 @@ internal object MathUtility {
         return (Math.random() * 16).toInt().toByte()
     }
 
+    /**
+     * ByteArray xor operation.
+     * TODO: is operator overriding more readable?
+     */
     fun xor(lhs: ByteArray, rhs: ByteArray) : ByteArray {
         return lhs.zip(rhs).map { (x, y) -> x xor y }.toByteArray()
     }

@@ -7,6 +7,7 @@ import org.superarts.ktpinblock.UnexpectedNullException
 import org.superarts.ktpinblock.calculator.BlockDecoder
 import org.superarts.ktpinblock.calculator.BlockEncoder
 import org.superarts.ktpinblock.utility.MathUtility
+import org.superarts.ktpinblock.utility.RandomNibbleProvider
 import org.superarts.ktpinblock.utility.toHexString
 
 /**
@@ -19,7 +20,7 @@ internal object PinBlockIso3: BlockEncoder, BlockDecoder {
     3	L	P	P	P	P	P/R	P/R	P/R	P/R	P/R	P/R	P/R	P/R	P/R	P/R
      */
     private fun preparePin(pin: String) : ByteArray {
-        return IsoPinPreparer.preparePin(pin, Const.ISO3_VERSION)
+        return IsoPinPreparer(RandomNibbleProvider).preparePin(pin, Const.ISO3_VERSION)
     }
 
     /**
