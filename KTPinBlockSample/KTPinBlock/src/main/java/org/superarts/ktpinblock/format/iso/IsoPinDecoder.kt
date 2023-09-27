@@ -5,12 +5,15 @@ import org.superarts.ktpinblock.PinBlockLengthException
 import org.superarts.ktpinblock.PinException
 import org.superarts.ktpinblock.format.PinDecoder
 import org.superarts.ktpinblock.utility.StringUtility
+import org.superarts.ktpinblock.utility.StringUtilityX
 import org.superarts.ktpinblock.utility.toHexString
 
 /**
  * PIN decoder for ISO formats.
  */
 internal object IsoPinDecoder : PinDecoder {
+    private val stringUtility: StringUtility = StringUtilityX
+
     /**
      * Convert PIN block string "12AB..." to ByteArray with 0x01, 0x02, 0x0a, 0x0b...
      */
@@ -19,7 +22,7 @@ internal object IsoPinDecoder : PinDecoder {
             throw PinBlockLengthException("PIN block length is not " + Const.PIN_BLOCK_LENGTH)
         }
 
-        val blockBytes = StringUtility.getByteArray(pinBlock)
+        val blockBytes = stringUtility.getByteArray(pinBlock)
         val preparedBlockBytes = ByteArray(blockBytes.size)
         for (index in blockBytes.indices) {
             val byte = blockBytes[index]

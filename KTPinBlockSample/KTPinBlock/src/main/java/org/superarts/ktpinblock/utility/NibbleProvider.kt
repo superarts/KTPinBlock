@@ -14,8 +14,10 @@ interface NibbleProvider {
  * Provide a random nibble. Usage: ISO3, etc.
  */
 internal object RandomNibbleProvider : NibbleProvider {
+    private val mathUtility: MathUtility = MathUtilityX
+
     override val nibble: Byte
-        get() = MathUtility.randomNibble()
+        get() = mathUtility.randomNibble()
 }
 
 /**

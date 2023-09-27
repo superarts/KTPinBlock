@@ -10,11 +10,13 @@ import org.superarts.ktpinblock.format.PinDecoder
 import org.superarts.ktpinblock.format.PinPreparer
 import org.superarts.ktpinblock.utility.FNibbleProvider
 import org.superarts.ktpinblock.utility.MathUtility
+import org.superarts.ktpinblock.utility.MathUtilityX
 
 /**
  * Implementation of [ISO-3](https://www.eftlab.com/knowledge-base/complete-list-of-pin-blocks#ISO-3)
  */
 internal object PinBlockIso0 : BlockEncoder, BlockDecoder {
+    private val mathUtility: MathUtility = MathUtilityX
     private val pinPreparer: PinPreparer = IsoPinPreparer(FNibbleProvider)
     private val panPreparer: PanPreparer = IsoPanPreparer
     private val pinDecoder: PinDecoder = IsoPinDecoder
@@ -44,7 +46,7 @@ internal object PinBlockIso0 : BlockEncoder, BlockDecoder {
      */
     private fun encodeBlock(panBytes: ByteArray, pinBytes: ByteArray) : ByteArray {
         // ISO3: Perform XOR bytes by bytes.
-        return MathUtility.xor(panBytes, pinBytes)
+        return mathUtility.xor(panBytes, pinBytes)
     }
 
     /**
@@ -68,7 +70,7 @@ internal object PinBlockIso0 : BlockEncoder, BlockDecoder {
         }
         val blockBytes = pinDecoder.prepareBlockBytes(pinBlock)
         val panBytes = preparePan(pan)
-        var pinBytes = MathUtility.xor(blockBytes, panBytes)
+        var pinBytes = mathUtility.xor(blockBytes, panBytes)
         return pinDecoder.decodePinBytes(pinBytes, Const.ISO0_VERSION)
     }
 }
