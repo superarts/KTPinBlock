@@ -195,6 +195,10 @@ This part is still working in progress. Some APIs are not available in `KMM`:
 - [x] `java.lang.String.format`. String formatting is still missing in `KMM`, but for our use case, we can come up with a less flexible implementation.
 </details>
 
+### Exception handling
+
+`KMM` can `throw` but support is not added yet. It is planned after more exceptions are added to the library.
+
 ### `KMM` plugin installation issues
 
 It is a known issue that with complex proxy setup in some companies, it is tricky to install all the `KMM` dependencies. It may not be a problem for Android developers because they tend to deal with similar issues regularly, but for iOS developers, it is recommended to just set up your `KMM` environment with something like your home internet. After the dependencies are installed, you can make changes to `Kotlin` source files and verify / debug in the iOS project with no issues.

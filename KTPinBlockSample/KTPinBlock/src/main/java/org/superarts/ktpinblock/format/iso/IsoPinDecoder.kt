@@ -18,10 +18,6 @@ internal object IsoPinDecoder : PinDecoder {
      * Convert PIN block string "12AB..." to ByteArray with 0x01, 0x02, 0x0a, 0x0b...
      */
     override fun prepareBlockBytes(pinBlock: String) : ByteArray {
-        if (pinBlock.length != Const.PIN_BLOCK_LENGTH) {
-            throw PinBlockLengthException("PIN block length is not " + Const.PIN_BLOCK_LENGTH)
-        }
-
         val blockBytes = stringUtility.getByteArray(pinBlock)
         val preparedBlockBytes = ByteArray(blockBytes.size)
         for (index in blockBytes.indices) {

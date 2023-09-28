@@ -17,9 +17,6 @@ internal class IsoPinPreparer(private val fillProvider: NibbleProvider) : PinPre
      * Convert PIN string "1234..." to ByteArray with 0x01, 0x02, 0x03, 0x04...
      */
     override fun preparePin(pin: String, version: Byte): ByteArray {
-        if (pin.length < 4) {
-            throw PinException("Pin length is less than 4")
-        }
         val pinBytes = stringUtility.getByteArray(pin)
         return preparePinBytes(pinBytes, version)
     }
