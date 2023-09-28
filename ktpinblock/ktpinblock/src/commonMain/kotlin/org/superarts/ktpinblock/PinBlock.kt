@@ -2,7 +2,9 @@ package org.superarts.ktpinblock
 
 import org.superarts.ktpinblock.coder.PinBlockDecoder
 import org.superarts.ktpinblock.coder.PinBlockEncoder
+import org.superarts.ktpinblock.format.InputValidator
 import org.superarts.ktpinblock.format.PinBlockFormat
+import org.superarts.ktpinblock.format.iso.EftInputValidator
 import org.superarts.ktpinblock.utility.toHexString
 import kotlin.experimental.or
 
@@ -12,7 +14,11 @@ import kotlin.experimental.or
  * To combine hi and low nibbles together, use `encodeToCompactBytes`.
  */
 class PinBlock : PinBlockEncoder, PinBlockDecoder {
+    private val inputValidator: InputValidator = EftInputValidator
+
     override fun encodeToBytes(pan: String?, pin: String, format: PinBlockFormat) : ByteArray {
+        inputValidator.validatePan(pan, format)
+        inputValidator.validatePin(pin, format)
         return format.encodeToBytes(pan, pin)
     }
 
@@ -51,9 +57,23 @@ class PinBlock : PinBlockEncoder, PinBlockDecoder {
         return compactBytes
     }
 
-    override fun decodePin(pinBlock: String, pan: String?, format: PinBlockFormat) : String {
+    override fun decodePinBlock(pinBlock: String, pan: String?, format: PinBlockFormat) : String {
+        inputValidator.validatePinBlock(pinBlock, format)
+        inputValidator.validatePan(pan, format)
         return format.decodeBlock(pinBlock, pan)
     }
+
+    override fun decodePinBlockFromBytes(pinBlock: ByteArray, pan: String?, format: PinBlockFormat) : String {
+        // TODO: validate PIN block bytes
+        inputValidator.validatePan(pan, format)
+        return format.decodeBlock(pinBlock.toHexString(), pan)
+    }
+
+    /**
+     * Decode PIN block from compact ByteArray.
+     * TODO: is it useful?
+     */
+    // override fun decodePinBlockFromCompactBytes(pinBlock: ByteArray, pan: String?, format: PinBlockFormat) : String { return "" }
 
     // TODO: move the following functions to MathUtility.
     //  However, they have to be private for some reason for the time being.

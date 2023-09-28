@@ -31,7 +31,7 @@ struct ContentView: View {
             Divider()
             Text(pinBlockEncoder.encodeToCompactBytes(pan: "43219876543210987", pin: "1234", format: .iso3).toHexString(separator: " ", prefix: "0x"))
             Divider()
-            Text(pinBlockDecoder.decodePin(pinBlock: "3412ACC9B98CDF43", pan: "43219876543210987", format: .iso3))
+            Text(pinBlockDecoder.decodePinBlock(pinBlock: "3412ACC9B98CDF43", pan: "43219876543210987", format: .iso3))
         }
         .padding()
     }

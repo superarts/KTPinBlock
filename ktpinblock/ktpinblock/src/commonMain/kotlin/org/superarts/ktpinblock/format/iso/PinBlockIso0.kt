@@ -5,19 +5,31 @@ import org.superarts.ktpinblock.PanException
 import org.superarts.ktpinblock.UnexpectedNullException
 import org.superarts.ktpinblock.coder.BlockDecoder
 import org.superarts.ktpinblock.coder.BlockEncoder
+import org.superarts.ktpinblock.format.InputValidator
+import org.superarts.ktpinblock.format.PanPreparer
+import org.superarts.ktpinblock.format.PinBlockFormat
+import org.superarts.ktpinblock.format.PinDecoder
+import org.superarts.ktpinblock.format.PinPreparer
 import org.superarts.ktpinblock.utility.FNibbleProvider
 import org.superarts.ktpinblock.utility.MathUtility
+import org.superarts.ktpinblock.utility.MathUtilityX
 
 /**
  * Implementation of [ISO-3](https://www.eftlab.com/knowledge-base/complete-list-of-pin-blocks#ISO-3)
  */
-internal object PinBlockIso0: BlockEncoder, BlockDecoder {
+internal object PinBlockIso0 : BlockEncoder, BlockDecoder {
+    private val mathUtility: MathUtility = MathUtilityX
+    private val pinPreparer: PinPreparer = IsoPinPreparer(FNibbleProvider)
+    private val panPreparer: PanPreparer = IsoPanPreparer
+    private val pinDecoder: PinDecoder = IsoPinDecoder
+    private val inputValidator: InputValidator = EftInputValidator
+
     /**
     Prepare a PIN – L is length of the PIN, P is PIN digit, F is padding value “F”
     1	2	3	4	5	6	7	8	9	10	11	12	13	14	15	16
     0	L	P	P	P	P	P/F	P/F	P/F	P/F	P/F	P/F	P/F	P/F	P/F	P/F     */
     private fun preparePin(pin: String) : ByteArray {
-        return IsoPinPreparer(FNibbleProvider).preparePin(pin, Const.ISO0_VERSION)
+        return pinPreparer.preparePin(pin, Const.ISO0_VERSION)
     }
 
     /**
@@ -29,7 +41,7 @@ internal object PinBlockIso0: BlockEncoder, BlockDecoder {
      *  The following implementation may be wrong, without clarification of the questions above.
      */
     private fun preparePan(pan: String) : ByteArray {
-        return IsoPanPreparer.preparePan(pan)
+        return panPreparer.preparePan(pan)
     }
 
     /**
@@ -37,13 +49,16 @@ internal object PinBlockIso0: BlockEncoder, BlockDecoder {
      */
     private fun encodeBlock(panBytes: ByteArray, pinBytes: ByteArray) : ByteArray {
         // ISO3: Perform XOR bytes by bytes.
-        return MathUtility.xor(panBytes, pinBytes)
+        return mathUtility.xor(panBytes, pinBytes)
     }
 
     /**
      * BlockEncoder: encode to byte
      */
     override fun encodeToBytes(pan: String?, pin: String) : ByteArray {
+        inputValidator.validatePan(pan, PinBlockFormat.ISO0)
+        inputValidator.validatePin(pin, PinBlockFormat.ISO0)
+        // TODO: find a better pattern
         if (pan == null) {
             throw UnexpectedNullException("PAN should not be null for ISO0")
         }
@@ -56,12 +71,15 @@ internal object PinBlockIso0: BlockEncoder, BlockDecoder {
      * BlockDecoder: decode to string
      */
     override fun decodeBlock(pinBlock: String, pan: String?) : String {
+        inputValidator.validatePinBlock(pinBlock, PinBlockFormat.ISO0)
+        inputValidator.validatePan(pan, PinBlockFormat.ISO0)
+        // TODO: find a better pattern
         if (pan == null) {
             throw UnexpectedNullException("PAN should not be null for ISO0")
         }
-        val blockBytes = IsoPinDecoder.prepareBlockBytes(pinBlock)
+        val blockBytes = pinDecoder.prepareBlockBytes(pinBlock)
         val panBytes = preparePan(pan)
-        var pinBytes = MathUtility.xor(blockBytes, panBytes)
-        return IsoPinDecoder.decodePinBytes(pinBytes, Const.ISO0_VERSION)
+        var pinBytes = mathUtility.xor(blockBytes, panBytes)
+        return pinDecoder.decodePinBytes(pinBytes, Const.ISO0_VERSION)
     }
 }

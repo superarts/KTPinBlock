@@ -1,12 +1,22 @@
 package org.superarts.ktpinblock.utility
 
-object StringUtility {
+/**
+ * String utility.
+ */
+interface StringUtility {
+    fun getByteArray(string: String) : ByteArray
+}
+
+/**
+ * kotlinx compatible string utility..
+ */
+object StringUtilityX : StringUtility {
     /**
      * Very basic `toByteArray` implementation for ASCII only.
      *
      * Discussion: String.toByteArray(Charsets.US_ASCII) is not available in kotlinx yet.
      */
-    fun getByteArray(string: String) : ByteArray {
+    override fun getByteArray(string: String) : ByteArray {
         val bytes = ByteArray(string.length)
         for (index in string.indices) {
             bytes[index] = string[index].code.toByte()

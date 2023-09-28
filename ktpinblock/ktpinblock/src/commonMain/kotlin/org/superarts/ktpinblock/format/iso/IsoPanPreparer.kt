@@ -2,20 +2,22 @@ package org.superarts.ktpinblock.format.iso
 
 import org.superarts.ktpinblock.Const
 import org.superarts.ktpinblock.PanException
+import org.superarts.ktpinblock.format.InputValidator
+import org.superarts.ktpinblock.format.PanPreparer
 import org.superarts.ktpinblock.utility.StringUtility
+import org.superarts.ktpinblock.utility.StringUtilityX
 
 /**
  * PAN preparer for ISO formats.
  */
-internal object IsoPanPreparer {
+internal object IsoPanPreparer : PanPreparer {
+    private val stringUtility: StringUtility = StringUtilityX
+
     /**
      * Convert PAN string "1234..." to ByteArray with 0x01, 0x02, 0x03, 0x04...
      */
-    fun preparePan(pan: String) : ByteArray {
-        if (pan.length < 12) {
-            throw PanException("Pan length is less than 12")
-        }
-        val panBytes = StringUtility.getByteArray(pan)
+    override fun preparePan(pan: String) : ByteArray {
+        val panBytes = stringUtility.getByteArray(pan)
         return preparePanBytes(panBytes)
     }
 
