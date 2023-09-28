@@ -8,6 +8,11 @@ internal object Const {
     var PIN_MIN_LENGTH = 4
 
     /**
+     * From [AWS doc]()]https://docs.aws.amazon.com/payment-cryptography/latest/DataAPIReference/API_GeneratePinData.html).
+     */
+    var PIN_MAX_LENGTH = 12
+
+    /**
      * "0" in ASCII to perform PIN and PIN block calculation.
      * It should not be used for other purposes.
      */
@@ -20,6 +25,11 @@ internal object Const {
      * so PAN should be at least 12 digits.
      */
     var PAN_MIN_LENGTH = 12
+
+    /**
+     * From [AWS doc]()]https://docs.aws.amazon.com/payment-cryptography/latest/DataAPIReference/API_GeneratePinData.html).
+     */
+    var PAN_MAX_LENGTH = 19
 
     // PIN block
 

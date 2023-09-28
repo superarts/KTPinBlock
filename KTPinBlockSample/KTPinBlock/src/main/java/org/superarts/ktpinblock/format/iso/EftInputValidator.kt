@@ -22,10 +22,13 @@ internal object EftInputValidator : InputValidator {
      */
     override fun validatePin(pin: String, format: PinBlockFormat) {
         if (pin.length < Const.PIN_MIN_LENGTH) {
-            throw PinException("Pin length is less than 4")
+            throw PinException("Pin length is less than " + Const.PIN_MIN_LENGTH)
         }
 
-        // TODO: validate max length
+        if (pin.length >= Const.PIN_MAX_LENGTH) {
+            throw PinException("Pin length is larger than " + Const.PIN_MAX_LENGTH)
+        }
+
         // TODO: validate PIN string to between 0 and 9
     }
 
@@ -66,9 +69,13 @@ internal object EftInputValidator : InputValidator {
      */
     override fun validatePanNotNull(pan: String) {
         if (pan.length < Const.PAN_MIN_LENGTH) {
-            throw PanException("Pan length is less than 12")
+            throw PanException("Pan length is less than " + Const.PAN_MIN_LENGTH)
         }
-        // TODO: validate max PAN length
+
+        if (pan.length >= Const.PAN_MAX_LENGTH) {
+            throw PinException("Pin length is larger than " + Const.PAN_MAX_LENGTH)
+        }
+
         // TODO: validate PAN string to between 0 and 9
     }
 
