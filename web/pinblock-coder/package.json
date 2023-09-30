@@ -1,0 +1,17 @@
+{
+  "name": "pinblock-coder",
+  "version": "1.0.0",
+  "description": "PIN block encoders and decoders.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "iso9564"
+  ],
+  "dependencies": {
+    "ktpinblock-ktpinblock": "1.0.0"
+  },
+  "author": "superarts",
+  "license": "ISC"
+}

@@ -2,7 +2,11 @@ plugins {
     kotlin("multiplatform")
     kotlin("native.cocoapods")
     id("com.android.library")
+    id("maven-publish")
 }
+
+group = "org.superarts.ktpinblock"
+version = "1.0.0"
 
 @OptIn(org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi::class)
 kotlin {
@@ -40,6 +44,11 @@ kotlin {
                 implementation(kotlin("test"))
             }
         }
+    }
+
+    js(IR) {
+        browser()
+        binaries.library()
     }
 }
 

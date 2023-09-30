@@ -9,12 +9,14 @@ import org.superarts.ktpinblock.format.iso.PinBlockIso0
 import org.superarts.ktpinblock.format.iso.PinBlockIso1
 import org.superarts.ktpinblock.format.iso.PinBlockIso2
 import org.superarts.ktpinblock.format.iso.PinBlockIso3
+import kotlin.js.JsExport
 
 /**
  * PIN block formats to be supported.
  * From: [ETFLab](https://www.eftlab.com/knowledge-base/complete-list-of-pin-blocks)
  * TODO: support other formats if needed, e.g. Q/CUP 006.4
  */
+@JsExport
 enum class PinBlockFormat : BlockEncoder, BlockDecoder {
     ISO0, ISO1, ISO2, ISO3, ISO4,
     ANSIX98, OEM1,

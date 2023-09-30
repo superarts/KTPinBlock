@@ -1,0 +1,18 @@
+{
+  "name": "ktpinblock-coder",
+  "version": "1.0.0",
+  "description": "ktpinblock encoder and decoder.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "iso9564"
+  ],
+  "author": "superarts",
+  "license": "ISC",
+  "dependencies": {
+    "ktpinblock-ktpinblock": "file:../../ktpinblock/build/js/packages/ktpinblock-ktpinblock",
+    "ktpinblock-ktpinblock-test": "file:../../ktpinblock/build/js/packages/ktpinblock-ktpinblock-test"
+  }
+}

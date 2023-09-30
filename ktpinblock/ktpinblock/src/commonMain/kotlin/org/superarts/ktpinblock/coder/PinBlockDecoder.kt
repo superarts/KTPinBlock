@@ -1,11 +1,13 @@
 package org.superarts.ktpinblock.coder
 
 import org.superarts.ktpinblock.format.PinBlockFormat
+import kotlin.js.JsExport
 
 /**
  * Provides PIN block decoding functionalities.
  * TODO: figure out the actual use cases and build easy-to-use APIs.
  */
+@JsExport
 interface PinBlockDecoder {
     /**
      * Decode PIN block as String.
