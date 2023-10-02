@@ -1,35 +1,53 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Update Paragraph</title>
+        <title>PIN block encoder and decoder</title>
     </head>
     <body>
-        <h1>PIN block encoder</h1>
-        <p>This is a POC of PIN block calculation based on `ktpinblock`. Fill the input field, then press the `Generate` button.</p>
+        <h1>PIN block encoder and decoder</h1>
+        <p>This web app calculates <a href="https://www.eftlab.com/knowledge-base/complete-list-of-pin-blocks">ISO 9564-1:2003 Format 0, 1, 2, 3 (ISO-0, ISO-1, ISO2, ISO3)</a>.</p>
+        <p>Fill the input field, then press the `Encode / Decode` button. For testing / verification purpose, you can use the `Prefill` buttons.</p>
         <hr />
-        <h2>ISO-0</h2>
+        <h2>Encoding to PIN block</h2>
+        <h3>ISO-0</h3>
         <input type="text" id="inputPanIso0" placeholder="Enter PAN here">
         <input type="text" id="inputPinIso0" placeholder="Enter PIN here">
-        <p id="resultIso0">Please enter PAN and PIN, then generate PIN block here.</p>
-        <hr />
-        <h2>ISO-1</h2>
+        <p id="resultIso0">Please enter PAN and PIN, then encode PIN block here.</p>
+        <h3>ISO-1</h3>
         <input type="text" id="inputPanIso1" placeholder="Enter PAN here">
         <input type="text" id="inputPinIso1" placeholder="Enter PIN here">
-        <p id="resultIso1">Please enter PAN and PIN, then generate PIN block here.</p>
-        <hr />
-        <h2>ISO-2</h2>
+        <p id="resultIso1">Please enter PAN and PIN, then encode PIN block here.</p>
+        <h3>ISO-2</h3>
         <input type="text" id="inputPanIso2" placeholder="Enter PAN here">
         <input type="text" id="inputPinIso2" placeholder="Enter PIN here">
-        <p id="resultIso2">Please enter PAN and PIN, then generate PIN block here.</p>
-        <hr />
-        <h2>ISO-3</h2>
+        <p id="resultIso2">Please enter PAN and PIN, then encode PIN block here.</p>
+        <h3>ISO-3</h3>
         <input type="text" id="inputPanIso3" placeholder="Enter PAN here">
         <input type="text" id="inputPinIso3" placeholder="Enter PIN here">
-        <p id="resultIso3">Please enter PAN and PIN, then generate PIN block here.</p>
+        <p id="resultIso3">Please enter PAN and PIN, then encode PIN block here.</p>
+        <hr />
+        <h2>Decoding from PIN block</h2>
+        <h3>ISO-0</h3>
+        <input type="text" id="inputDecodePinBlockIso0" placeholder="Enter PIN block here">
+        <input type="text" id="inputDecodePanIso0" placeholder="Enter PAN here">
+        <p id="resultDecodeIso0">Please enter PIN block and PAN, then decode PIN here.</p>
+        <h3>ISO-1</h3>
+        <input type="text" id="inputDecodePinBlockIso1" placeholder="Enter PIN block here">
+        <input type="text" id="inputDecodePanIso1" placeholder="Enter PAN here">
+        <p id="resultDecodeIso1">Please enter PIN block and PAN, then decode PIN here.</p>
+        <h3>ISO-2</h3>
+        <input type="text" id="inputDecodePinBlockIso2" placeholder="Enter PIN block here">
+        <input type="text" id="inputDecodePanIso2" placeholder="Enter PAN here">
+        <p id="resultDecodeIso2">Please enter PIN block and PAN, then decode PIN here.</p>
+        <h3>ISO-3</h3>
+        <input type="text" id="inputDecodePinBlockIso3" placeholder="Enter PIN block here">
+        <input type="text" id="inputDecodePanIso3" placeholder="Enter PAN here">
+        <p id="resultDecodeIso3">Please enter PIN block and PAN, then decode PIN here.</p>
         <hr />
         <button onclick="prefill1()">Prefill Dummy Test Codes</button>
         <button onclick="prefill2()">Prefill EFTLab Test Codes</button>
-        <button onclick="encodeAll()">Generate PIN block</button>
+        <button onclick="calculateAll()">Encode / Decode All</button>
         <script type="module" src="bundle.js"></script>
+        <p>Any contribution will be much appreciated.</p>
     </body>
 </html>
