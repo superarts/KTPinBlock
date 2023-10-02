@@ -16,7 +16,7 @@ A Kotlin implementation of [PIN Block formats](https://www.eftlab.com/knowledge-
 - [ ] Add [Hilt](https://developer.android.com/training/dependency-injection/hilt-android)
 - [ ] Add `ktlint`
 - [x] `KMM` iOS support
-- [ ] `KMM` web support
+- [x] `KMM` web support
 - [ ] CI with GitHub actions
 - [ ] CD with GitHub actions
 - [ ] Export to Maven
@@ -37,7 +37,9 @@ A Kotlin implementation of [PIN Block formats](https://www.eftlab.com/knowledge-
 - [iOS support](#ios-support)
   - [How to build](#how-to-build)
   - [`kotlinx` compatibility issues](#kotlinx-compatibility-issues)
+  - [Exception handling](#exception-handling)
   - [`KMM` plugin installation issues](#kmm-plugin-installation-issues)
+- [Web Support](#web-support)
 - [About TODOs in source code](#about-todos-in-source-code)
 - [Naming convention](#naming-convention)
   - [About plural form](#about-plural-form)
@@ -202,6 +204,10 @@ This part is still working in progress. Some APIs are not available in `KMM`:
 ### `KMM` plugin installation issues
 
 It is a known issue that with complex proxy setup in some companies, it is tricky to install all the `KMM` dependencies. It may not be a problem for Android developers because they tend to deal with similar issues regularly, but for iOS developers, it is recommended to just set up your `KMM` environment with something like your home internet. After the dependencies are installed, you can make changes to `Kotlin` source files and verify / debug in the iOS project with no issues.
+
+## Web Support
+
+Please visit [this sample static website](https://www.superarts.org/KTPinBlock/) to check out JavaScript based APIs. Sample code can be found in the [web/ktpinblock-coder](https://github.com/superarts/KTPinBlock/blob/aa814f0f4e0f0b7a50105ccf4c7e2a57d51f0be4/web/ktpinblock-coder/script.js) sample project.
 
 ## About TODOs in source code
 
