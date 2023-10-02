@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Update Paragraph</title>
+    </head>
+    <body>
+        <h1>PIN block encoder</h1>
+        <p>This is a POC of PIN block calculation based on `ktpinblock`. Fill the input field, then press the `Generate` button.</p>
+        <hr />
+        <h2>ISO-0</h2>
+        <input type="text" id="inputPanIso0" placeholder="Enter PAN here">
+        <input type="text" id="inputPinIso0" placeholder="Enter PIN here">
+        <p id="resultIso0">Please enter PAN and PIN, then generate PIN block here.</p>
+        <hr />
+        <h2>ISO-1</h2>
+        <input type="text" id="inputPanIso1" placeholder="Enter PAN here">
+        <input type="text" id="inputPinIso1" placeholder="Enter PIN here">
+        <p id="resultIso1">Please enter PAN and PIN, then generate PIN block here.</p>
+        <hr />
+        <h2>ISO-2</h2>
+        <input type="text" id="inputPanIso2" placeholder="Enter PAN here">
+        <input type="text" id="inputPinIso2" placeholder="Enter PIN here">
+        <p id="resultIso2">Please enter PAN and PIN, then generate PIN block here.</p>
+        <hr />
+        <h2>ISO-3</h2>
+        <input type="text" id="inputPanIso3" placeholder="Enter PAN here">
+        <input type="text" id="inputPinIso3" placeholder="Enter PIN here">
+        <p id="resultIso3">Please enter PAN and PIN, then generate PIN block here.</p>
+        <hr />
+        <button onclick="prefill1()">Prefill Dummy Test Codes</button>
+        <button onclick="prefill2()">Prefill EFTLab Test Codes</button>
+        <button onclick="encodeAll()">Generate PIN block</button>
+        <script type="module" src="bundle.js"></script>
+    </body>
+</html>
