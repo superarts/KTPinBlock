@@ -7,12 +7,14 @@ import org.superarts.ktpinblock.format.PinBlockFormat
 import org.superarts.ktpinblock.format.iso.EftInputValidator
 import org.superarts.ktpinblock.utility.toHexString
 import kotlin.experimental.or
+import kotlin.js.JsExport
 
 /**
  * Implements PinBlockEncoder and PinBlockDecoder based on different PinBlockFormats.
  * Internal calculation is based on bytes, i.e. `encodeToBytes`.
  * To combine hi and low nibbles together, use `encodeToCompactBytes`.
  */
+@JsExport
 class PinBlock : PinBlockEncoder, PinBlockDecoder {
     private val inputValidator: InputValidator = EftInputValidator
 

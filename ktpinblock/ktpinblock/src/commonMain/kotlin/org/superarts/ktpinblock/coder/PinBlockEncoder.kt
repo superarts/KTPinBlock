@@ -1,6 +1,7 @@
 package org.superarts.ktpinblock.coder
 
 import org.superarts.ktpinblock.format.PinBlockFormat
+import kotlin.js.JsExport
 
 /**
  * Provides more PIN block encoding APIs based on `BlockEncoder`.
@@ -8,6 +9,7 @@ import org.superarts.ktpinblock.format.PinBlockFormat
  * TODO: figure out the actual use cases and build easy-to-use APIs.
  * TODO: VERY IMPORTANT figure out whether pan should be null or ignored.
  */
+@JsExport
 interface PinBlockEncoder {
     /**
      * Encode to ByteArray, e.g. 0x3 0x4 0x1 0x2 ...

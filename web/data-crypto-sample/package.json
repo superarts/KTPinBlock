@@ -1,0 +1,16 @@
+{
+  "dependencies": {
+    "data-crypto": "^1.4.4"
+  },
+  "type": "module",
+  "name": "pbtool",
+  "version": "1.0.0",
+  "description": "PIN-block test tool.",
+  "main": "index.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
